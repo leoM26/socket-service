@@ -9,6 +9,7 @@
  * Author: aurelio
  *
  */
+#include "config.h"
 
 #ifndef SRVCXNMANAGER_H
 #define SRVCXNMANAGER_H

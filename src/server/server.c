@@ -23,12 +23,18 @@
 #include <stdbool.h>
 
 #include "srvcxnmanager.h"
+#include "config.h"
 
 /*
  *
  */
 
 int main(int argc, char** argv) {
+
+
+    Config cfg;
+    read_config(&cfg, "server_config.cfg");
+
     int sockfd = -1;
     int index = 1;
     connection_t *connection;

@@ -8,18 +8,19 @@ CC = gcc
 GTK1 = `pkg-config --cflags gtk+-3.0`
 GTK2 = `pkg-config --libs gtk+-3.0`
 # define any compile-time flags
-CFLAGS	:= -Wall -Wextra -g -DDEBUG
+CFLAGS	:= -Wall -Wextra -g -DDEBUG 
 
 # define library paths in addition to /usr/lib
 #   if I wanted to include libraries not in /usr/lib I'd specify
 #   their path using -Lpath, something like:
-LFLAGS = -lconfig
+LFLAGS = -lconfig -lpthread
 
 # define output directory
 OUTPUT	:= output
 
 # define source directory
-SRC		:= src
+CLIENTSRC := src/client
+SERVERSRC := src/server 
 
 # define include directory
 INCLUDE	:= include
@@ -36,8 +37,10 @@ FIXPATH = $(subst /,\,$1)
 RM			:= del /q /f
 MD	:= mkdir
 else
-MAIN	:= main
-SOURCEDIRS	:= $(shell find $(SRC) -type d)
+CLIENTMAIN	:= client
+SERVERMAIN	:= server
+CLIENTSOURCEDIRS	:= $(shell find $(CLIENTSRC) -type d)
+SERVERSOURCEDIRS	:= $(shell find $(SERVERSRC) -type d)
 INCLUDEDIRS	:= $(shell find $(INCLUDE) -type d)
 LIBDIRS		:= $(shell find $(LIB) -type d)
 FIXPATH = $1
@@ -52,10 +55,12 @@ INCLUDES	:= $(patsubst %,-I%, $(INCLUDEDIRS:%/=%))
 LIBS		:= $(patsubst %,-L%, $(LIBDIRS:%/=%))
 
 # define the C source files
-SOURCES		:= $(wildcard $(patsubst %,%/*.c, $(SOURCEDIRS)))
+CLIENTSOURCES		:= $(wildcard $(patsubst %,%/*.c, $(CLIENTSOURCEDIRS)))
+SERVERSOURCES		:= $(wildcard $(patsubst %,%/*.c, $(SERVERSOURCEDIRS)))
 
 # define the C object files 
-OBJECTS		:= $(SOURCES:.c=.o)
+CLIENTOBJECTS		:= $(CLIENTSOURCES:.c=.o)
+SERVEROBJECTS		:= $(SERVERSOURCES:.c=.o)
 
 #
 # The following part of the makefile is generic; it can be used to 
@@ -63,16 +68,20 @@ OBJECTS		:= $(SOURCES:.c=.o)
 # deleting dependencies appended to the file from 'make depend'
 #
 
-OUTPUTMAIN	:= $(call FIXPATH,$(OUTPUT)/$(MAIN))
+CLIENTOUTPUTMAIN	:= $(call FIXPATH,$(OUTPUT)/$(CLIENTMAIN))
+SERVEROUTPUTMAIN	:= $(call FIXPATH,$(OUTPUT)/$(SERVERMAIN))
 
-all: $(OUTPUT) $(MAIN)
+all: $(OUTPUT) $(CLIENTMAIN) $(SERVERMAIN)
 	@echo Executing 'all' complete!
 
 $(OUTPUT):
 	$(MD) $(OUTPUT)
 
-$(MAIN): $(OBJECTS) 
-	$(CC) $(CFLAGS) $(GTK1) $(INCLUDES) -o $(OUTPUTMAIN) $(OBJECTS) $(LFLAGS) $(LIBS) $(GTK2)
+$(CLIENTMAIN): $(OUTPUT) $(CLIENTOBJECTS) 
+	$(CC) $(CFLAGS) $(GTK1) $(INCLUDES) -o $(CLIENTOUTPUTMAIN) $(CLIENTOBJECTS) $(LFLAGS) $(LIBS) $(GTK2)
+
+$(SERVERMAIN): $(OUTPUT) $(SERVEROBJECTS) 
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(SERVEROUTPUTMAIN) $(SERVEROBJECTS) $(LFLAGS) $(LIBS)
 
 # this is a suffix replacement rule for building .o's from .c's
 # it uses automatic variables $<: the name of the prerequisite of
@@ -83,10 +92,11 @@ $(MAIN): $(OBJECTS)
 
 .PHONY: clean
 clean:
-	$(RM) $(OUTPUTMAIN)
-	$(RM) $(call FIXPATH,$(OBJECTS))
+	$(RM) -R $(OUTPUT)
+	$(RM) $(call FIXPATH,$(CLIENTOBJECTS))
+	$(RM) $(call FIXPATH,$(SERVEROBJECTS))
 	@echo Cleanup complete!
 
-run: all
-	./$(OUTPUTMAIN)
-	@echo Executing 'run: all' complete!
+#run: all
+#	./$(OUTPUTMAIN)
+#	@echo Executing 'run: all' complete!
