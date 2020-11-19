@@ -27,6 +27,9 @@ GtkBuilder *builder = NULL;
  * 
  */
 
+void on_button_click() {
+    printf("bouton 'Yes' clicked\n");
+}
 
 
 int main(int argc, char **argv)
