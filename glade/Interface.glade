@@ -4,6 +4,8 @@
   <requires lib="gtk+" version="3.22"/>
   <object class="GtkWindow" id="app_win">
     <property name="can_focus">False</property>
+    <signal name="destroy" handler="on_window_main_destroy" swapped="no"/>
+    <signal name="show" handler="on_window_main_show" object="lb_progress_bar" swapped="no"/>
     <child>
       <object class="GtkBox">
         <property name="width_request">500</property>
@@ -113,6 +115,33 @@
           </packing>
         </child>
         <child>
+          <object class="GtkLabel" id="lb_choice">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Choix :</property>
+            <attributes>
+              <attribute name="font-desc" value="Sans Bold 11"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="lb_choice_select">
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">6</property>
+          </packing>
+        </child>
+        <child>
           <object class="GtkGrid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
@@ -125,8 +154,9 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="tooltip_text" translatable="yes">Trahir</property>
                 <property name="margin_left">10</property>
-                <signal name="clicked" handler="btn_trahir_clicked" swapped="no"/>
+                <signal name="clicked" handler="btn_trahir_clicked" object="lb_choice_select" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -141,7 +171,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="margin_right">10</property>
-                <signal name="clicked" handler="btn_collaborer_clicked" swapped="no"/>
+                <signal name="clicked" handler="btn_collaborer_clicked" object="lb_choice_select" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -153,7 +183,21 @@
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="padding">45</property>
-            <property name="position">5</property>
+            <property name="position">7</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="btn_send">
+            <property name="label" translatable="yes">Envoyer réponse</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <signal name="clicked" handler="btn_send_clicked" swapped="no"/>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">8</property>
           </packing>
         </child>
       </object>

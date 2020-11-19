@@ -27,17 +27,32 @@ GtkBuilder *builder = NULL;
  * 
  */
 
-void btn_collaborer_clicked(GtkButton *button) {
+void btn_collaborer_clicked(GtkButton *button, GtkLabel *label) {
     printf("bouton 'Collaborer' clicked\n");
+    gtk_label_set_text (GTK_LABEL(label), (const gchar*) "Collaborer");
 }
 
-void btn_trahir_clicked(GtkButton *button) {
+void btn_trahir_clicked(GtkButton *button, GtkLabel *label) {
     printf("bouton 'Trahir' clicked\n");
+    gtk_label_set_text (GTK_LABEL(label), (const gchar*) "Trahir");
 }
+
+void btn_send_clicked(GtkButton *button) {
+    printf("bouton 'Envoyer réponse' clicked\n");
+}
+
+void on_window_main_show() {
+    printf("window open\n");
+}
+
+void on_window_main_destroy() {
+    printf("window close\n");
+    gtk_main_quit();
+}
+
 
 int main(int argc, char **argv)
 {
-
 
     GtkWidget *win;
 
@@ -47,7 +62,7 @@ int main(int argc, char **argv)
     gtk_builder_connect_signals(builder, NULL);
     gtk_widget_show(win);
     gtk_main();
-
+/*
     Config cfg;
     read_config(&cfg, "client_config.cfg");
 
@@ -73,6 +88,6 @@ int main(int argc, char **argv)
         status = write(sockfd, msg, strlen(msg));
         //memset(msg,'\0',100);
     } while (status != -1);
-
+*/
     return (EXIT_SUCCESS);
 }
