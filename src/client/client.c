@@ -27,10 +27,13 @@ GtkBuilder *builder = NULL;
  * 
  */
 
-void on_button_click() {
-    printf("bouton 'Yes' clicked\n");
+void btn_collaborer_clicked(GtkButton *button) {
+    printf("bouton 'Collaborer' clicked\n");
 }
 
+void btn_trahir_clicked(GtkButton *button) {
+    printf("bouton 'Trahir' clicked\n");
+}
 
 int main(int argc, char **argv)
 {

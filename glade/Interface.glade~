@@ -122,10 +122,10 @@
                 <property name="label" translatable="yes">Trahir</property>
                 <property name="height_request">100</property>
                 <property name="visible">True</property>
-                <property name="sensitive">False</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="margin_left">10</property>
+                <signal name="clicked" handler="btn_trahir_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -133,13 +133,14 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="btn_collabarer">
+              <object class="GtkButton" id="btn_collaborer">
                 <property name="label" translatable="yes">Collaborer</property>
                 <property name="height_request">100</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="margin_right">10</property>
+                <signal name="clicked" handler="btn_collaborer_clicked" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
