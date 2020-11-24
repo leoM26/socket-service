@@ -22,54 +22,35 @@
 #include<gtk/gtk.h>
 
 #include "clientcxnmanager.h"
-GtkBuilder *builder = NULL;
+#include "../commun/paquet.h"
+#include "interface.h"
+
 /*
  * 
  */
 
-void btn_collaborer_clicked(GtkButton *button, GtkLabel *label) {
-    printf("bouton 'Collaborer' clicked\n");
-    gtk_label_set_text (GTK_LABEL(label), (const gchar*) "Collaborer");
-}
+void thread_terminal(int *socket) {
 
-void btn_trahir_clicked(GtkButton *button, GtkLabel *label) {
-    printf("bouton 'Trahir' clicked\n");
-    gtk_label_set_text (GTK_LABEL(label), (const gchar*) "Trahir");
+    int status;
+    char msg[100];
+  do
+    {
+        fgets(msg, 100, stdin);
+        //printf("sending : %s\n", msg);
+        status = write(*socket, msg, strlen(msg));
+        //memset(msg,'\0',100);
+    } while (status != -1);
 }
-
-void btn_send_clicked(GtkButton *button) {
-    printf("bouton 'Envoyer réponse' clicked\n");
-}
-
-void on_window_main_show() {
-    printf("window open\n");
-}
-
-void on_window_main_destroy() {
-    printf("window close\n");
-    gtk_main_quit();
-}
-
 
 int main(int argc, char **argv)
 {
-
-    GtkWidget *win;
-
-    gtk_init(&argc, &argv);
-    builder = gtk_builder_new_from_file("glade/Interface.glade");
-    win = GTK_WIDGET(gtk_builder_get_object(builder, "app_win"));
-    gtk_builder_connect_signals(builder, NULL);
-    gtk_widget_show(win);
-    gtk_main();
-/*
     Config cfg;
     read_config(&cfg, "client_config.cfg");
 
     int sockfd;
     int status = 0;
     char msg[100];
-    pthread_t thread;
+    pthread_t thread,thread_2;
 
     sockfd = open_connection(&cfg);
 
@@ -77,17 +58,18 @@ int main(int argc, char **argv)
     printf("sending : %s\n", msg);
     write(sockfd, msg, strlen(msg));
 
-    //Creation d'un pthread de lecture
+    interface_start(argc,argv);
+   //Creation d'un pthread de lecture
     pthread_create(&thread, 0, threadProcess, &sockfd);
     //write(connection->sock,"Main APP Still running",15);
     pthread_detach(thread);
-    do
-    {
-        fgets(msg, 100, stdin);
-        //printf("sending : %s\n", msg);
-        status = write(sockfd, msg, strlen(msg));
-        //memset(msg,'\0',100);
-    } while (status != -1);
-*/
+
+    //Creation d'un pthread de lecture
+    pthread_create(&thread_2, 0, thread_terminal, &sockfd);
+    //write(connection->sock,"Main APP Still running",15);
+    pthread_detach(thread_2);
+
+    gtk_main();
+
     return (EXIT_SUCCESS);
 }

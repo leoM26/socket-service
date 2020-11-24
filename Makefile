@@ -21,6 +21,7 @@ OUTPUT	:= output
 # define source directory
 CLIENTSRC := src/client
 SERVERSRC := src/server 
+COMMUNSRC := src/commun
 
 # define include directory
 INCLUDE	:= include
@@ -39,8 +40,8 @@ MD	:= mkdir
 else
 CLIENTMAIN	:= client
 SERVERMAIN	:= server
-CLIENTSOURCEDIRS	:= $(shell find $(CLIENTSRC) -type d)
-SERVERSOURCEDIRS	:= $(shell find $(SERVERSRC) -type d)
+CLIENTSOURCEDIRS	:= $(shell find $(CLIENTSRC) -type d) $(shell find $(COMMUNSRC) -type d)
+SERVERSOURCEDIRS	:= $(shell find $(SERVERSRC) -type d) $(shell find $(COMMUNSRC) -type d)
 INCLUDEDIRS	:= $(shell find $(INCLUDE) -type d)
 LIBDIRS		:= $(shell find $(LIB) -type d)
 FIXPATH = $1

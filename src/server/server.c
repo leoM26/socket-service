@@ -24,6 +24,7 @@
 
 #include "srvcxnmanager.h"
 #include "config.h"
+#include "../commun/paquet.h"
 
 /*
  *
