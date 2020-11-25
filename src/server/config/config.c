@@ -2,6 +2,10 @@
 #include <libconfig.h>
 #include "config.h"
 
+int get_adversaire(int client_id){
+ 
+}
+
 void parse_game_configuration(GameConfiguration *game_configuration, config_setting_t *setting)
 {
     game_configuration = malloc(sizeof(GameConfiguration));

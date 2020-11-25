@@ -22,6 +22,7 @@ typedef struct {
     struct sockaddr address;
     int addr_len;
     int index;
+    int client_id;
 } connection_t;
 
 

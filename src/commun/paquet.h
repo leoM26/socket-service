@@ -9,7 +9,7 @@ typedef struct {
 }Paquet;
 
 typedef struct {
-    char wait[10];
+    bool wait;
 }Rep_connexion_data;
 
 typedef struct {

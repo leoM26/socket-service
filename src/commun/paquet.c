@@ -15,7 +15,7 @@ char* convert_data_to_json(enum code_protocol code, void *data){
     }
     case REP_CONNEXION:{
         Rep_connexion_data *results = (Rep_connexion_data*)data;
-        json_object_object_add(object,"msg",json_object_new_string("en attente du prochain joueur"));
+        json_object_object_add(object,"wait",json_object_new_boolean(results->wait));
         break;
     }
     case START_GAME:{
@@ -51,12 +51,39 @@ char* convert_data_to_json(enum code_protocol code, void *data){
     return json_object_get_string(object);
 }
 
+
+void *parse_json(char *json, enum code_protocol code){
+    switch (code)
+    {
+    case REP_CONNEXION:{
+        json_object* object = json_tokener_parse(json);
+        Rep_connexion_data data;
+        json_object_object_get_ex(object, "wait", &data.wait);
+        return &data;
+        break;
+
+    }
+
+    }
+}
+
 void send_packet(enum code_protocol code, int client_id, void *data, int sockfd){
     Paquet paquet;
     paquet.code_protocole = code;
     paquet.client_id = client_id;
     char* json = convert_data_to_json(code, data);
-    memcpy(&paquet.json_data,json,strlen(json));
+    int len;
+    if (json!=NULL)
+    {
+         len = strlen(json);
+    }
+    else
+    {
+        len = 0;
+    }
+    
+    
+    memcpy(&paquet.json_data,json,len);
     free(json);
     write(sockfd, &paquet, sizeof(Paquet));
 }

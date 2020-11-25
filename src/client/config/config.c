@@ -18,7 +18,7 @@ void read_config(Config *configuration, char *filename){
         config_lookup_int(&cfg, "server_port", &configuration->port);
     }
     #if DEBUG
-        printf("client name : %s\n", configuration->name);
+        printf("client name : %d\n", configuration->name);
         printf("server ip : %s\n", configuration->ip);
         printf("server port : %d\n", configuration->port);
     #endif

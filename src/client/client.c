@@ -23,7 +23,7 @@
 
 #include "clientcxnmanager.h"
 #include "../commun/paquet.h"
-#include "interface.h"
+#include "ui/interface.h"
 
 /*
  * 
@@ -37,7 +37,7 @@ void thread_terminal(int *socket) {
     {
         fgets(msg, 100, stdin);
         //printf("sending : %s\n", msg);
-        status = write(*socket, msg, strlen(msg));
+        //status = write(*socket, msg, strlen(msg));
         //memset(msg,'\0',100);
     } while (status != -1);
 }
@@ -54,9 +54,9 @@ int main(int argc, char **argv)
 
     sockfd = open_connection(&cfg);
 
-    strcpy(msg, "Hello from Xeon"); //Xeon is the name of the this client
-    printf("sending : %s\n", msg);
-    write(sockfd, msg, strlen(msg));
+    //strcpy(msg, "Hello from Xeon"); //Xeon is the name of the this client
+    //printf("sending : %s\n", msg);
+    //write(sockfd, msg, strlen(msg));
 
     interface_start(argc,argv);
    //Creation d'un pthread de lecture
@@ -64,9 +64,7 @@ int main(int argc, char **argv)
     //write(connection->sock,"Main APP Still running",15);
     pthread_detach(thread);
 
-
-    send_packet(CONNEXION,,NULL,sockfd);
-
+    send_packet(CONNEXION,cfg.name,NULL,sockfd);
 
     //Creation d'un pthread de lecture
     pthread_create(&thread_2, 0, thread_terminal, &sockfd);

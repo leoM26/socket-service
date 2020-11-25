@@ -15,7 +15,7 @@
 
 #define BUFFERSIZE 2048
 
-#include "config.h"
+#include "config/config.h"
 
 void *threadProcess(void * ptr);
 int open_connection(Config * cfg);
