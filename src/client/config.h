@@ -3,7 +3,7 @@
 
 typedef struct
 {
-    char *name;
+    int name;
     char *ip;
     int port;
 } Config;

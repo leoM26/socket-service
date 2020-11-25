@@ -13,7 +13,7 @@ CFLAGS	:= -Wall -Wextra -g -DDEBUG -rdynamic
 # define library paths in addition to /usr/lib
 #   if I wanted to include libraries not in /usr/lib I'd specify
 #   their path using -Lpath, something like:
-LFLAGS = -lconfig -lpthread
+LFLAGS = -lconfig -lpthread -ljson-c
 
 # define output directory
 OUTPUT	:= output

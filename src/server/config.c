@@ -17,9 +17,9 @@ void parse_game_configuration(GameConfiguration *game_configuration, config_sett
         wp->clients_name = (char **)malloc((int)2 * sizeof(char *));
         for (int j = 0; j < 2; j++)
         {
-            wp->clients_name[j] = (char *)malloc(100 * sizeof(char));
+            wp->clients_name[j] = (int*)malloc(2 * sizeof(int));
             config_setting_t *client_name_config = config_setting_get_elem(clients_room_config, j);
-            config_setting_lookup_string(client_name_config, "name", &wp->clients_name[j]);
+            config_setting_lookup_int(client_name_config, "name", &wp->clients_name[j]);
         }
         game_configuration->rooms[i] = *wp;
         wp++;

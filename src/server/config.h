@@ -2,7 +2,7 @@
 #define CONFIG_HEADER_FILE_H
 typedef struct{
     char *name;
-    char **clients_name;
+    int *clients_name;
 } Room;
 
 typedef struct

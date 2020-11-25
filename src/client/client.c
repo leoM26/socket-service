@@ -64,6 +64,10 @@ int main(int argc, char **argv)
     //write(connection->sock,"Main APP Still running",15);
     pthread_detach(thread);
 
+
+    send_packet(CONNEXION,,NULL,sockfd);
+
+
     //Creation d'un pthread de lecture
     pthread_create(&thread_2, 0, thread_terminal, &sockfd);
     //write(connection->sock,"Main APP Still running",15);
