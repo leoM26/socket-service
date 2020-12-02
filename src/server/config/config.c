@@ -2,8 +2,36 @@
 #include <libconfig.h>
 #include "config.h"
 
+Config* config = NULL;
+
+Room* get_room(int client_id){
+    GameConfiguration* game_config = config->game_config ;
+    for (int i = 0; i < game_config->nb_room; i++)
+    {
+        Room *current_room = &game_config->rooms[i];
+        for (int j = 0; j < 2; j++)
+        {
+            if (current_room->clients_name[j] == client_id)
+            {
+                return current_room;
+            }
+            
+        }
+        
+    }
+    
+}
+
+
 int get_adversaire(int client_id){
- 
+
+    Room* room = get_room(client_id);
+
+    for (int i = 0; i < 2; i++)
+    {
+        if (room->clients_name[i] != client_id)
+            return room->clients_name[i];
+    } 
 }
 
 void parse_game_configuration(GameConfiguration *game_configuration, config_setting_t *setting)
@@ -53,6 +81,7 @@ void *read_config(Config *configuration, char *filename)
         GameConfiguration *game_configuration;
         parse_game_configuration(&game_configuration, setting);
         configuration->game_config = game_configuration;
+        config = configuration;
 #if DEBUG
         printf("bind ip : %s\n", configuration->bind_ip);
         printf("bind port : %d\n", configuration->bind_port);

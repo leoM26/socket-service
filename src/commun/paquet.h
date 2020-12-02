@@ -44,6 +44,7 @@ enum code_protocol {
     STOP_CONNEXION=7//connexion OFF
 };
 
+void *parse_json(char *json, enum code_protocol code);
 
 void send_packet(enum code_protocol code, int client_id, void *data, int sockfd);
 #endif

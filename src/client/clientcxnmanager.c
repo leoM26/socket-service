@@ -11,6 +11,9 @@
 #include "clientcxnmanager.h"
 #include "../commun/paquet.h"
 
+int Socket;
+
+
 void *threadProcess(void *ptr)
 {
     char buffer_in[BUFFERSIZE];
@@ -37,6 +40,8 @@ void *threadProcess(void *ptr)
             printf("action : %d\n", packet->code_protocole);
             printf("json : %s\n", packet->json_data);
         }
+
+        
     
         if (strncmp(buffer_in, "exit", 4) == 0) {
             break;
@@ -76,6 +81,10 @@ int open_connection(Config *cfg)
         printf("Fail to connect to server");
         exit(-1);
     };
-
+    Socket = sockfd;
     return sockfd;
+}
+
+int get_socket(void){
+    return Socket;
 }

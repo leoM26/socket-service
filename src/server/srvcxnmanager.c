@@ -79,7 +79,7 @@ void *threadProcess(void *ptr)
     // sprintf(buffer_out, "Welcome #%i\n", connection->index);
     // write(connection->sockfd, buffer_out, strlen(buffer_out));
 
-    while ((len = read(connection->sockfd, buffer_in, BUFFERSIZE)) > 0)
+    while ((len = read(connection->sockfd, buffer_in, sizeof(Paquet))) > 0)
     {
 
         unsigned char *buffer = (unsigned char *)malloc(sizeof(Paquet));
@@ -103,6 +103,14 @@ void *threadProcess(void *ptr)
             printf("client_id : %d\n", packet->client_id);
             printf("action : %d\n", packet->code_protocole);
         }
+
+        if (packet->code_protocole == CHOICE)
+        {   
+            Choice_data* data = parse_json(packet->json_data,CHOICE);
+            printf("client_id : %d\n", packet->client_id);
+            printf("choice : %d\n", data->choice);
+        }
+
         
         
 

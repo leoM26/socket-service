@@ -1,15 +1,23 @@
 #include<gtk/gtk.h>
 
+#include "../../commun/paquet.h"
+#include "../../server/srvcxnmanager.h"
+#include "../clientcxnmanager.h"
+
+
 GtkBuilder *builder = NULL;
 
 void btn_collaborer_clicked(GtkButton *button, GtkLabel *label) {
     printf("bouton 'Collaborer' clicked\n");
     gtk_label_set_text (GTK_LABEL(label), (const gchar*) "Collaborer");
+    Choice_data data ={.choice = 1,.time = 0};
+    send_packet(CHOICE,0,&data, get_socket());
 }
 
 void btn_trahir_clicked(GtkButton *button, GtkLabel *label) {
     printf("bouton 'Trahir' clicked\n");
     gtk_label_set_text (GTK_LABEL(label), (const gchar*) "Trahir");
+    //send_packet(CHOICE,packet->client_id,NULL, connection->sockfd);
 }
 
 void btn_send_clicked(GtkButton *button) {

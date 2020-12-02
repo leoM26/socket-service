@@ -19,6 +19,7 @@
 
 void *threadProcess(void * ptr);
 int open_connection(Config * cfg);
+int get_socket(void);
 
 #endif /* CLIENTCXNMANAGER_H */
 

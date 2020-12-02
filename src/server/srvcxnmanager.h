@@ -10,6 +10,7 @@
  *
  */
 #include "config/config.h"
+#include <netinet/in.h>
 
 #ifndef SRVCXNMANAGER_H
 #define SRVCXNMANAGER_H
