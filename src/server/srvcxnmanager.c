@@ -9,7 +9,6 @@
 #include <arpa/inet.h>
 
 #include "srvcxnmanager.h"
-#include "config.h"
 #include "../commun/paquet.h"
 
 connection_t *connections[MAXSIMULTANEOUSCLIENTS];
