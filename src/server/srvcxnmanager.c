@@ -85,14 +85,25 @@ void *threadProcess(void *ptr)
         unsigned char *buffer = (unsigned char *)malloc(sizeof(Paquet));
         memcpy(buffer, buffer_in, sizeof(Paquet));
         Paquet *packet = (Paquet *)buffer;
-        printf("client_id : %d\n", packet->client_id);
         
         if (packet->code_protocole == CONNEXION)
         {
             connection->client_id = packet->client_id; 
             Rep_connexion_data data = {.wait = true};
             send_packet(REP_CONNEXION, packet->client_id, &data, connection->sockfd);
+            printf("client_id : %d\n", packet->client_id);
+            printf("action : %d\n", packet->code_protocole);
         }
+
+        if (packet->code_protocole == START_GAME)
+        {
+            connection->client_id = packet->client_id; 
+            Start_round_data data = {.game = true};
+            send_packet(START_ROUND, packet->client_id, &data, connection->sockfd);
+            printf("client_id : %d\n", packet->client_id);
+            printf("action : %d\n", packet->code_protocole);
+        }
+        
         
 
 

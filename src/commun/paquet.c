@@ -18,14 +18,10 @@ char* convert_data_to_json(enum code_protocol code, void *data){
         json_object_object_add(object,"wait",json_object_new_boolean(results->wait));
         break;
     }
-    case START_GAME:{
-        Start_game_data *results = (Start_game_data*)data;
-        json_object_object_add(object,"msg",json_object_new_string("le jeu commence"));
-        break;
-    }
+
     case START_ROUND:{
         Start_round_data *results = (Start_round_data*)data;
-        json_object_object_add(object,"msg",json_object_new_string("le round commence"));
+        json_object_object_add(object,"game",json_object_new_boolean(results->game));
         break;
     }
     case CHOICE:{
@@ -61,8 +57,15 @@ void *parse_json(char *json, enum code_protocol code){
         json_object_object_get_ex(object, "wait", &data.wait);
         return &data;
         break;
-
     }
+    case START_ROUND:{
+        json_object* object = json_tokener_parse(json);
+        Start_round_data data;
+        json_object_object_get_ex(object, "game", &data.game);
+        return &data;
+        break;
+    }
+
 
     }
 }

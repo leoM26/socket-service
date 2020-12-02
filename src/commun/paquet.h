@@ -13,11 +13,7 @@ typedef struct {
 }Rep_connexion_data;
 
 typedef struct {
-    char start_game[10];
-}Start_game_data;
-
-typedef struct {
-    char start_round[10];
+    bool game;
 }Start_round_data;
 
 typedef struct {
@@ -27,11 +23,11 @@ typedef struct {
 
 typedef struct {
 
-    
 }End_round_data;
 
 typedef struct {
     bool winner;
+    int round;
 }End_game_data;
 
 

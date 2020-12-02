@@ -66,10 +66,13 @@ int main(int argc, char **argv)
 
     send_packet(CONNEXION,cfg.name,NULL,sockfd);
 
+    send_packet(START_GAME,cfg.name,NULL,sockfd);
+
     //Creation d'un pthread de lecture
     pthread_create(&thread_2, 0, thread_terminal, &sockfd);
     //write(connection->sock,"Main APP Still running",15);
     pthread_detach(thread_2);
+
 
     gtk_main();
 

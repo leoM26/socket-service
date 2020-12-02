@@ -16,14 +16,28 @@ void *threadProcess(void *ptr)
     char buffer_in[BUFFERSIZE];
     int sockfd = *((int *)ptr);
     int len;
-    while ((len = read(sockfd, buffer_in, BUFFERSIZE)) != 0)
+
+
+    while ((len = read(sockfd, buffer_in, sizeof(Paquet))) != 0)
     {
         unsigned char *buffer = (unsigned char *)malloc(sizeof(Paquet));
         memcpy(buffer, buffer_in, sizeof(Paquet));
         Paquet *packet = (Paquet *)buffer;
-        printf("action : %d\n", packet->code_protocole);
-        printf("json : %s\n", packet->json_data);
-        
+
+        if (packet->code_protocole == REP_CONNEXION)
+        {
+            printf("client_id : %d\n", packet->client_id);
+            printf("action : %d\n", packet->code_protocole);
+            printf("json : %s\n", packet->json_data);
+        }
+
+        if (packet->code_protocole == START_ROUND)
+        {
+            printf("client_id : %d\n", packet->client_id);
+            printf("action : %d\n", packet->code_protocole);
+            printf("json : %s\n", packet->json_data);
+        }
+    
         if (strncmp(buffer_in, "exit", 4) == 0) {
             break;
         }
