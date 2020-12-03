@@ -7,22 +7,28 @@
 
 GtkBuilder *builder = NULL;
 
+int choix = 0;
+
 void btn_collaborer_clicked(GtkButton *button, GtkLabel *label) {
     printf("bouton 'Collaborer' clicked\n");
     gtk_label_set_text (GTK_LABEL(label), (const gchar*) "Collaborer");
-    Choice_data data ={.choice = 1,.time = 0};
-    send_packet(CHOICE,0,&data, get_socket());
+   choix =1;
 }
 
 void btn_trahir_clicked(GtkButton *button, GtkLabel *label) {
     printf("bouton 'Trahir' clicked\n");
     gtk_label_set_text (GTK_LABEL(label), (const gchar*) "Trahir");
     Choice_data data ={.choice = 2,.time = 0};
-    send_packet(CHOICE,0,&data, get_socket());
+    choix = 2;
 }
 
 void btn_send_clicked(GtkButton *button) {
     printf("bouton 'Envoyer réponse' clicked\n");
+    if (choix != 0)
+    {
+    Choice_data data ={.choice = choix,.time = 0};
+    send_packet(CHOICE,NULL,&data, get_socket());
+    }
 }
 
 void on_window_main_show() {
