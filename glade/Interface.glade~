@@ -66,7 +66,7 @@
               <object class="GtkLabel" id="lb_evennement">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Evennement :</property>
+                <property name="label" translatable="yes">Evenement :</property>
                 <attributes>
                   <attribute name="font-desc" value="Sans Bold 11"/>
                 </attributes>
@@ -80,18 +80,35 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
+            <property name="padding">1</property>
             <property name="position">2</property>
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="lb_time">
+          <object class="GtkGrid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_top">24</property>
-            <property name="label" translatable="yes">Temps :</property>
-            <attributes>
-              <attribute name="font-desc" value="Sans Bold 11"/>
-            </attributes>
+            <property name="column_homogeneous">True</property>
+            <child>
+              <object class="GtkLabel" id="lb_round_msg">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="lb_evenement_msg">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -100,45 +117,141 @@
           </packing>
         </child>
         <child>
-          <object class="GtkProgressBar" id="lb_progress_bar">
-            <property name="height_request">20</property>
+          <object class="GtkGrid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_left">10</property>
-            <property name="margin_right">10</property>
+            <property name="column_homogeneous">True</property>
+            <child>
+              <object class="GtkButton" id="btn_mise1">
+                <property name="label" translatable="yes">Mise 1</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="btn_mise1_clicked" object="lb_bet_msg" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="btn_mise2">
+                <property name="label" translatable="yes">Mise 2</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="btn_mise2_clicked" object="lb_bet_msg" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="btn_mise3">
+                <property name="label" translatable="yes">Mise 3</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="btn_mise3_clicked" object="lb_bet_msg" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="btn_mise4">
+                <property name="label" translatable="yes">Mise 4</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="btn_mise4_clicked" object="lb_bet_msg" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="btn_mise5">
+                <property name="label" translatable="yes">Mise 5</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <signal name="clicked" handler="btn_mise5_clicked" object="lb_bet_msg" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">4</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="padding">10</property>
+            <property name="padding">15</property>
             <property name="position">4</property>
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="lb_choice">
+          <object class="GtkGrid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Choix :</property>
-            <attributes>
-              <attribute name="font-desc" value="Sans Bold 11"/>
-            </attributes>
+            <property name="column_homogeneous">True</property>
+            <child>
+              <object class="GtkLabel" id="lb_bet">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Mise :</property>
+                <attributes>
+                  <attribute name="font-desc" value="Sans Bold 10"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="lb_choice">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Choix :</property>
+                <attributes>
+                  <attribute name="font-desc" value="Sans Bold 10"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="lb_bet_msg">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="lb_choice_msg">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
             <property name="position">5</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="lb_choice_select">
-            <property name="height_request">40</property>
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">6</property>
           </packing>
         </child>
         <child>
@@ -156,7 +269,7 @@
                 <property name="receives_default">True</property>
                 <property name="tooltip_text" translatable="yes">Trahir</property>
                 <property name="margin_left">10</property>
-                <signal name="clicked" handler="btn_trahir_clicked" object="lb_choice_select" swapped="no"/>
+                <signal name="clicked" handler="btn_trahir_clicked" object="lb_choice_msg" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -171,7 +284,7 @@
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="margin_right">10</property>
-                <signal name="clicked" handler="btn_collaborer_clicked" object="lb_choice_select" swapped="no"/>
+                <signal name="clicked" handler="btn_collaborer_clicked" object="lb_choice_msg" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
