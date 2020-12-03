@@ -38,7 +38,7 @@ enum code_protocol {
     REP_CONNEXION=1,//envoie attente oui ou non
     START_GAME=2,//envoie le début du jeu
     START_ROUND=3,//envoie qui commence
-    CHOICE=4,//envoie choix, temps de réaction
+    CHOICE=4,//envoie choix (1 pour collaborer et 2 pour trahir), temps de réaction
     END_ROUND=5,//envoie la fin du jeu
     END_GAME=6,//envoie gagnant
     STOP_CONNEXION=7//connexion OFF

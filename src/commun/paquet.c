@@ -77,10 +77,12 @@ void *parse_json(char *json, enum code_protocol code)
     case CHOICE:
     {
         json_object *object = json_tokener_parse(json);
-        Choice_data data;
-        json_object_object_get_ex(object, "choice", &data.choice);
-        json_object_object_get_ex(object, "time", &data.time);
-        return &data;
+        json_object *choice_object = json_object_object_get(object, "choice");
+        json_object *time_object = json_object_object_get(object, "time");
+        Choice_data *data = (Choice_data *) malloc(sizeof(Choice_data));
+        data->choice = json_object_get_int(choice_object);
+        data->time = json_object_get_double(time_object);
+        return data;
         break;
     }
     }
