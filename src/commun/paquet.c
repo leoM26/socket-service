@@ -24,7 +24,7 @@ char *convert_data_to_json(enum code_protocol code, void *data)
     case START_ROUND:
     {
         Start_round_data *results = (Start_round_data *)data;
-        json_object_object_add(object, "game", json_object_new_boolean(results->game));
+        json_object_object_add(object, "winner", json_object_new_boolean(results->winner));
         break;
     }
     case CHOICE:
@@ -32,11 +32,6 @@ char *convert_data_to_json(enum code_protocol code, void *data)
         Choice_data *results = (Choice_data *)data;
         json_object_object_add(object, "choice", json_object_new_int(results->choice));
         json_object_object_add(object, "time", json_object_new_double(results->time));
-        break;
-    }
-    case END_ROUND:
-    {
-        End_round_data *results = (End_round_data *)data;
         break;
     }
     case END_GAME:
@@ -70,7 +65,7 @@ void *parse_json(char *json, enum code_protocol code)
     {
         json_object *object = json_tokener_parse(json);
         Start_round_data data;
-        json_object_object_get_ex(object, "game", &data.game);
+        json_object_object_get_ex(object, "winner", &data.winner);
         return &data;
         break;
     }

@@ -9,11 +9,12 @@
  * Author: aurelio
  *
  */
-#include "config/config.h"
-#include <netinet/in.h>
 
 #ifndef SRVCXNMANAGER_H
 #define SRVCXNMANAGER_H
+
+#include "config/config.h"
+#include <netinet/in.h>
 
 #define BUFFERSIZE 2048
 #define MAXSIMULTANEOUSCLIENTS 100

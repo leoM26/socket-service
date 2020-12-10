@@ -2,6 +2,12 @@
 #include <libconfig.h>
 #include "config.h"
 
+Config* config = NULL;
+
+Config* get_config(){
+    return config;
+}
+
 void read_config(Config *configuration, char *filename){
     config_t cfg;
     config_setting_t *setting;
@@ -22,4 +28,5 @@ void read_config(Config *configuration, char *filename){
         printf("server ip : %s\n", configuration->ip);
         printf("server port : %d\n", configuration->port);
     #endif
+    config = configuration;
 }

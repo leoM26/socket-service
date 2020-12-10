@@ -1,9 +1,10 @@
-#ifndef CONFIG_HEADER_FILE_H
-#define CONFIG_HEADER_FILE_H
-
+#ifndef CONFIG_HEADER_SERVER_H
+#define CONFIG_HEADER_SERVER_H
 typedef struct{
     char *name;
     int *clients_name;
+    int rounds;
+    int current_round;
 } Room;
 
 typedef struct
@@ -20,6 +21,10 @@ typedef struct
     GameConfiguration *game_config;
 } Config;
 
+void read_config(Config *configuration, char *filename);
 
-void *read_config(Config *configuration, char *filename);
+int get_adversaire(int client_id);
+
+Room* get_room(int client_id);
+
 #endif

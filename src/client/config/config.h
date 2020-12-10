@@ -1,5 +1,5 @@
-#ifndef CONFIG_HEADER_FILE_H
-#define CONFIG_HEADER_FILE_H
+#ifndef CONFIG_HEADER_CLIENT_H
+#define CONFIG_HEADER_CLIENT_H
 
 typedef struct
 {
@@ -8,6 +8,7 @@ typedef struct
     int port;
 } Config;
 
+Config* get_config();
 
 void read_config(Config *configuration, char *filename);
 #endif

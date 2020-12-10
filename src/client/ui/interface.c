@@ -1,8 +1,8 @@
 #include <gtk/gtk.h>
 
 #include "../../commun/paquet.h"
-#include "../../server/srvcxnmanager.h"
 #include "../clientcxnmanager.h"
+#include "../config/config.h"
 
 GtkBuilder *builder = NULL;
 
@@ -50,7 +50,7 @@ void btn_send_clicked(GtkButton *button)
     if (choix != 0)
     {
         Choice_data data = {.choice = choix, .time = 0};
-        send_packet(CHOICE, NULL, &data, get_socket());
+        send_packet(CHOICE, get_config()->name, &data, get_socket());
     }
 }
 
@@ -67,7 +67,7 @@ void on_window_main_destroy()
 
 void interface_start(int argc, char **argv)
 {
-
+    
     GtkWidget *win;
     gtk_init(&argc, &argv);
     builder = gtk_builder_new_from_file("glade/Interface.glade");

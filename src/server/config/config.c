@@ -46,6 +46,7 @@ void parse_game_configuration(GameConfiguration *game_configuration, config_sett
         config_setting_lookup_string(current_room_config, "name", &wp->name);
         printf("%s\n", wp->name);
         config_setting_t *clients_room_config = config_setting_get_member(current_room_config, "clients");
+        config_setting_lookup_int(current_room_config,"rounds",&wp->rounds);
         wp->clients_name = (char **)malloc((int)2 * sizeof(char *));
         for (int j = 0; j < 2; j++)
         {
@@ -58,7 +59,7 @@ void parse_game_configuration(GameConfiguration *game_configuration, config_sett
     }
 }
 
-void *read_config(Config *configuration, char *filename)
+void read_config(Config *configuration, char *filename)
 {
     config_t cfg;
     config_setting_t *setting;

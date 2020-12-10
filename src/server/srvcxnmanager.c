@@ -10,6 +10,8 @@
 
 #include "srvcxnmanager.h"
 #include "../commun/paquet.h"
+#include "game/game.h"
+#include "config/config.h"
 
 connection_t *connections[MAXSIMULTANEOUSCLIENTS];
 
@@ -33,6 +35,21 @@ void add(connection_t *connection)
     }
     perror("Too much simultaneous connections");
     exit(-5);
+}
+
+connection_t *get_connection(int client_id)
+{
+    for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++)
+    {
+        if (connections[i] != NULL)
+        {
+            if (connections[i]->client_id == client_id)
+            {
+                return connections[i];
+            }
+        }
+    }
+    return NULL;
 }
 
 void del(connection_t *connection)
@@ -85,10 +102,11 @@ void *threadProcess(void *ptr)
         unsigned char *buffer = (unsigned char *)malloc(sizeof(Paquet));
         memcpy(buffer, buffer_in, sizeof(Paquet));
         Paquet *packet = (Paquet *)buffer;
-        
+
+        connection->client_id = packet->client_id;
+
         if (packet->code_protocole == CONNEXION)
         {
-            connection->client_id = packet->client_id; 
             Rep_connexion_data data = {.wait = true};
             send_packet(REP_CONNEXION, packet->client_id, &data, connection->sockfd);
             printf("client_id : %d\n", packet->client_id);
@@ -97,23 +115,74 @@ void *threadProcess(void *ptr)
 
         if (packet->code_protocole == START_GAME)
         {
-            connection->client_id = packet->client_id; 
-            Start_round_data data = {.game = true};
-            send_packet(START_ROUND, packet->client_id, &data, connection->sockfd);
+            Start_round_data data = {.winner = true};
+            connection_t *adversaire_connection = get_connection(get_adversaire(packet->client_id));
+
+            if (adversaire_connection != NULL)
+            {
+                Room *room = get_room(packet->client_id);
+                room->current_round = 0;
+                send_packet(START_ROUND, packet->client_id, &data, connection->sockfd);
+                send_packet(START_ROUND, adversaire_connection->client_id, &data, adversaire_connection->sockfd);
+            }
             printf("client_id : %d\n", packet->client_id);
             printf("action : %d\n", packet->code_protocole);
         }
 
         if (packet->code_protocole == CHOICE)
-        {   
-            Choice_data* data = parse_json(packet->json_data,CHOICE);
+        {
+            Choice_data *data = parse_json(packet->json_data, CHOICE);
             printf("client_id : %d\n", packet->client_id);
             printf("choice : %d\n", data->choice);
+            Round_choice *choice_adversaire = get_client_choice(get_adversaire(packet->client_id));
+            if (choice_adversaire == NULL)
+            {
+                Round_choice *choice = malloc(sizeof(Round_choice));
+                choice->client_id = packet->client_id;
+                choice->choice = data->choice;
+                add_round_choice(choice);
+            }
+            else
+            {
+                if (choice_adversaire->choice == data->choice == 0)
+                {
+
+                }
+                else if (choice_adversaire->choice == data->choice == 1)
+                {
+                }
+                else if (choice_adversaire->choice == 0 && data->choice == 1)
+                {
+                }
+                else
+                {
+                }
+                choice_adversaire = NULL;
+                Room* room = get_room(packet->client_id);
+                room->current_round++;
+                
+                if (room->current_round < room->rounds)
+                {
+                    Start_round_data data = {.winner = true, .round = room->current_round};
+                    send_packet(START_ROUND,packet->client_id, &data, connection->sockfd);
+                    send_packet(START_ROUND,connection->client_id, &data, connection->sockfd);
+                }
+                
+            
+            }
         }
 
-        
-        
+        //-> Quand un client fait un choix
 
+        //si choix de l'adversaire n'est pas stocké get_client_choice(get_adversaire_id(connection->client_id))
+
+        //add_client_choice(mon_choix)
+
+        //sinon
+        //Récupère le choix de l'adversaire
+        //Je détermine qui a gagné  0 -> 0 |  1 -> 1 | 0 -> 1
+        //IMPORTANT : adversaire_choice = NULL
+        //Envoie aux deux client qui a gagné
 
         //       if (strncmp(buffer_in, "bye", 3) == 0) {
         //           break;
