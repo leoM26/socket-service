@@ -12,3 +12,5 @@ Etapes de production :
 - Faire affichage resultats
 - Faire Trello
 - Faire documentation
+
+- fonction remove, faire les calculs

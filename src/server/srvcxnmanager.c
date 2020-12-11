@@ -157,7 +157,6 @@ void *threadProcess(void *ptr)
                 else
                 {
                 }
-                choice_adversaire = NULL;
                 Room* room = get_room(packet->client_id);
                 room->current_round++;
                 
