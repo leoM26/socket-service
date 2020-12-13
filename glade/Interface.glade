@@ -28,10 +28,9 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="lb_joueur">
+          <object class="GtkLabel" id="lb_winner_msg">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Joueur</property>
             <attributes>
               <attribute name="font-desc" value="Sans Bold 16"/>
             </attributes>

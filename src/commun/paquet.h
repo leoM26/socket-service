@@ -22,10 +22,8 @@ typedef struct {
     double time;
 }Choice_data;
 
-
 typedef struct {
     bool winner;
-    int round;
 }End_game_data;
 
 

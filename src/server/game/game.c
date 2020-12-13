@@ -32,7 +32,17 @@ Round_choice* get_client_choice(int client_id){
     return NULL;
 }
 
-
+void remove_client_choice(Round_choice* choice)    
+{       
+    for (int i = 0; i < 20; i++)    
+    {    
+        if (choice == choices[i])    
+        {    
+            choices[i] = NULL;    
+            return;    
+        }    
+    }      
+}
 
 
 //-> Quand un client fait un choix

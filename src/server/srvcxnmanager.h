@@ -25,6 +25,7 @@ typedef struct {
     int addr_len;
     int index;
     int client_id;
+    int points;
 } connection_t;
 
 
@@ -33,6 +34,7 @@ void add(connection_t *connection);
 void del(connection_t *connection);
 void *threadProcess(void *ptr);
 int create_server_socket() ;
+
 
 #endif /* SRVCXNMANAGER_H */
 

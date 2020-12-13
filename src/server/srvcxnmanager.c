@@ -95,10 +95,10 @@ void *threadProcess(void *ptr)
     // printf("Welcome #%i\n", connection->index);
     // sprintf(buffer_out, "Welcome #%i\n", connection->index);
     // write(connection->sockfd, buffer_out, strlen(buffer_out));
+    connection->points = 0;
 
     while ((len = read(connection->sockfd, buffer_in, sizeof(Paquet))) > 0)
     {
-
         unsigned char *buffer = (unsigned char *)malloc(sizeof(Paquet));
         memcpy(buffer, buffer_in, sizeof(Paquet));
         Paquet *packet = (Paquet *)buffer;
@@ -111,22 +111,17 @@ void *threadProcess(void *ptr)
             send_packet(REP_CONNEXION, packet->client_id, &data, connection->sockfd);
             printf("client_id : %d\n", packet->client_id);
             printf("action : %d\n", packet->code_protocole);
-        }
 
-        if (packet->code_protocole == START_GAME)
-        {
-            Start_round_data data = {.winner = true};
+            Start_round_data round_data = {.winner = true,.round = 1};
             connection_t *adversaire_connection = get_connection(get_adversaire(packet->client_id));
 
             if (adversaire_connection != NULL)
             {
                 Room *room = get_room(packet->client_id);
                 room->current_round = 0;
-                send_packet(START_ROUND, packet->client_id, &data, connection->sockfd);
-                send_packet(START_ROUND, adversaire_connection->client_id, &data, adversaire_connection->sockfd);
+                send_packet(START_ROUND, packet->client_id, &round_data, connection->sockfd);
+                send_packet(START_ROUND, adversaire_connection->client_id, &round_data, adversaire_connection->sockfd);
             }
-            printf("client_id : %d\n", packet->client_id);
-            printf("action : %d\n", packet->code_protocole);
         }
 
         if (packet->code_protocole == CHOICE)
@@ -144,29 +139,42 @@ void *threadProcess(void *ptr)
             }
             else
             {
-                if (choice_adversaire->choice == data->choice == 0)
+                connection_t *adversaire_connection = get_connection(get_adversaire(packet->client_id));
+                if (choice_adversaire->choice == data->choice == COLLABORER)
                 {
-
+                    adversaire_connection->points++;
+                    connection->points++;
                 }
-                else if (choice_adversaire->choice == data->choice == 1)
+                else if (choice_adversaire->choice == data->choice == TRAHIR)
                 {
+                    adversaire_connection->points -= 5;
+                    connection->points -= 5;
                 }
-                else if (choice_adversaire->choice == 0 && data->choice == 1)
+                else if (choice_adversaire->choice == COLLABORER && data->choice == TRAHIR)
                 {
+                    connection->points +=5;
                 }
                 else
                 {
+                    adversaire_connection->points += 5;
                 }
                 Room* room = get_room(packet->client_id);
                 room->current_round++;
-                
+                remove_client_choice(choice_adversaire);
                 if (room->current_round < room->rounds)
                 {
                     Start_round_data data = {.winner = true, .round = room->current_round};
+                    Start_round_data adversaire_data = {.winner = false, .round = room->current_round};
                     send_packet(START_ROUND,packet->client_id, &data, connection->sockfd);
-                    send_packet(START_ROUND,connection->client_id, &data, connection->sockfd);
+                    send_packet(START_ROUND,adversaire_connection->client_id, &adversaire_data, adversaire_connection->sockfd);
                 }
-                
+                else
+                {
+                    End_game_data data = {.winner = true};
+                    End_game_data adversaire_data = {.winner = false};
+                    send_packet(END_GAME,packet->client_id,&data,connection->sockfd);
+                    send_packet(END_GAME,adversaire_connection->client_id,&adversaire_data,adversaire_connection->sockfd);
+                }
             
             }
         }

@@ -10,6 +10,44 @@ int choix = 0;
 int elapsed_time = 30;
 int time_id = 0;
 
+void rep_connection()
+{
+    GtkLabel *label = GTK_LABEL(gtk_builder_get_object(builder, "lb_evenement_msg"));
+    gtk_label_set_text(label, "Vous etes actuellement dans la salle d'attente");
+}
+
+void round_start(bool winner, int round)
+{
+    GtkLabel *label = GTK_LABEL(gtk_builder_get_object(builder, "lb_evenement_msg"));
+    gtk_label_set_text(label, "Faites vos jeux !");
+    if (round != 1)
+    {
+        GtkLabel *label = GTK_LABEL(gtk_builder_get_object(builder, "lb_winner_msg"));
+        if (winner)
+        {
+            gtk_label_set_text(label, "Vous avez gagné ce round !");
+        }
+        else
+        {
+            gtk_label_set_text(label, "Vous avez perdu ce round !");
+        }
+    }
+}
+
+void end_game(bool winner)
+{
+    GtkLabel *label = GTK_LABEL(gtk_builder_get_object(builder, "lb_evennement_msg"));
+
+    if (winner)
+    {
+        gtk_label_set_text(label, "Bravo ! Vous etes le gagnant");
+    }
+    else
+    {
+        gtk_label_set_text(label, "Dommage ! Vous avez perdu");
+    }
+}
+
 int timer_handler()
 {
     if (elapsed_time > 0)
@@ -67,7 +105,7 @@ void on_window_main_destroy()
 
 void interface_start(int argc, char **argv)
 {
-    
+
     GtkWidget *win;
     gtk_init(&argc, &argv);
     builder = gtk_builder_new_from_file("glade/Interface.glade");

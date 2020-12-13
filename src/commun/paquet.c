@@ -25,6 +25,7 @@ char *convert_data_to_json(enum code_protocol code, void *data)
     {
         Start_round_data *results = (Start_round_data *)data;
         json_object_object_add(object, "winner", json_object_new_boolean(results->winner));
+        json_object_object_add(object, "round", json_object_new_int(results->round));
         break;
     }
     case CHOICE:
@@ -51,33 +52,42 @@ char *convert_data_to_json(enum code_protocol code, void *data)
 
 void *parse_json(char *json, enum code_protocol code)
 {
+    json_object *object = json_tokener_parse(json);
     switch (code)
     {
     case REP_CONNEXION:
     {
-        json_object *object = json_tokener_parse(json);
-        Rep_connexion_data data;
-        json_object_object_get_ex(object, "wait", &data.wait);
-        return &data;
+        Rep_connexion_data *data = (Rep_connexion_data *)malloc(sizeof(Rep_connexion_data));
+        json_object *wait_object = json_object_object_get(object, "wait");
+        data->wait = json_object_get_boolean(wait_object);
+        return data;
         break;
     }
     case START_ROUND:
     {
-        json_object *object = json_tokener_parse(json);
-        Start_round_data data;
-        json_object_object_get_ex(object, "winner", &data.winner);
-        return &data;
+        Start_round_data *data = (Start_round_data *)malloc(sizeof(Start_round_data));
+        json_object *round_object = json_object_object_get(object, "round");
+        json_object *winner_object = json_object_object_get(object, "winner");
+        data->round = json_object_get_int(round_object);
+        data->winner = json_object_get_boolean(winner_object);
+        return data;
         break;
     }
     case CHOICE:
     {
-        json_object *object = json_tokener_parse(json);
         json_object *choice_object = json_object_object_get(object, "choice");
         json_object *time_object = json_object_object_get(object, "time");
-        Choice_data *data = (Choice_data *) malloc(sizeof(Choice_data));
+        Choice_data *data = (Choice_data *)malloc(sizeof(Choice_data));
         data->choice = json_object_get_int(choice_object);
         data->time = json_object_get_double(time_object);
         return data;
+        break;
+    }
+    case END_GAME:
+    {
+        End_game_data data;
+        json_object_object_get_ex(object, "winner", &data.winner);
+        return &data;
         break;
     }
     }

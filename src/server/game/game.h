@@ -7,8 +7,15 @@ typedef struct
     int choice;
 } Round_choice;
 
+enum choice{
+    TRAHIR = 1,
+    COLLABORER = 2,
+};
+
 void add_round_choice(Round_choice* choice);
 
 Round_choice* get_client_choice(int client_id);
+
+void remove_client_choice(Round_choice* choice);
 
 #endif

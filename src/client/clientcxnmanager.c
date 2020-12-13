@@ -10,6 +10,8 @@
 
 #include "clientcxnmanager.h"
 #include "../commun/paquet.h"
+#include "listener/listener.h"
+
 
 int Socket;
 
@@ -29,6 +31,8 @@ void *threadProcess(void *ptr)
 
         if (packet->code_protocole == REP_CONNEXION)
         {
+            Rep_connexion_data* data = parse_json(packet->json_data,packet->code_protocole);
+            on_rep_connection(data);
             printf("client_id : %d\n", packet->client_id);
             printf("action : %d\n", packet->code_protocole);
             printf("json : %s\n", packet->json_data);
@@ -36,11 +40,20 @@ void *threadProcess(void *ptr)
 
         if (packet->code_protocole == START_ROUND)
         {
+            Start_round_data* data = parse_json(packet->json_data,packet->code_protocole);
+            on_round_start(data);
             printf("client_id : %d\n", packet->client_id);
             printf("action : %d\n", packet->code_protocole);
             printf("json : %s\n", packet->json_data);
         }
-
+        if (packet->code_protocole == END_GAME)
+        {
+            End_game_data* data = parse_json(packet->json_data,packet->code_protocole);
+            on_end_game(data);
+            printf("action : %d\n", packet->code_protocole);
+            printf("json : %s\n", packet->json_data);
+        }
+        
         
     
         if (strncmp(buffer_in, "exit", 4) == 0) {
