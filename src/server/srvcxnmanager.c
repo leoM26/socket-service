@@ -112,13 +112,13 @@ void *threadProcess(void *ptr)
             printf("client_id : %d\n", packet->client_id);
             printf("action : %d\n", packet->code_protocole);
 
-            Start_round_data round_data = {.winner = true,.round = 1};
             connection_t *adversaire_connection = get_connection(get_adversaire(packet->client_id));
 
             if (adversaire_connection != NULL)
             {
                 Room *room = get_room(packet->client_id);
                 room->current_round = 0;
+                Start_round_data round_data = {.winner = true,.round = room->current_round};
                 send_packet(START_ROUND, packet->client_id, &round_data, connection->sockfd);
                 send_packet(START_ROUND, adversaire_connection->client_id, &round_data, adversaire_connection->sockfd);
             }

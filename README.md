@@ -8,9 +8,10 @@ Etapes de production :
 - Gerer les evennements(fait)
 - Definir un protocole(fait)
 - Gestion des threads(fait)
-- Codage jeu
+- Codage jeu(fait)
 - Faire affichage resultats
 - Faire Trello
 - Faire documentation
 
-- fonction remove, faire les calculs
+- fonction remove, faire les calculs(fait)
+- faire les affichages sur glade
