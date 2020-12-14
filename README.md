@@ -9,7 +9,7 @@ Etapes de production :
 - Definir un protocole(fait)
 - Gestion des threads(fait)
 - Codage jeu(fait)
-- Faire affichage resultats
+- Faire affichage resultats CSV
 - Faire Trello
 - Faire documentation
 

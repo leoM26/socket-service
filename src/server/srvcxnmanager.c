@@ -109,8 +109,9 @@ void *threadProcess(void *ptr)
         {
             Rep_connexion_data data = {.wait = true};
             send_packet(REP_CONNEXION, packet->client_id, &data, connection->sockfd);
+            printf("--------------------\n");
             printf("client_id : %d\n", packet->client_id);
-            printf("action : %d\n", packet->code_protocole);
+            printf("code protocole : %d\n", packet->code_protocole);
 
             connection_t *adversaire_connection = get_connection(get_adversaire(packet->client_id));
 
@@ -127,7 +128,9 @@ void *threadProcess(void *ptr)
         if (packet->code_protocole == CHOICE)
         {
             Choice_data *data = parse_json(packet->json_data, CHOICE);
+            printf("--------------------\n");
             printf("client_id : %d\n", packet->client_id);
+            printf("code protocole : %d\n", packet->code_protocole);
             printf("choice : %d\n", data->choice);
             Round_choice *choice_adversaire = get_client_choice(get_adversaire(packet->client_id));
             if (choice_adversaire == NULL)
@@ -140,38 +143,42 @@ void *threadProcess(void *ptr)
             else
             {
                 connection_t *adversaire_connection = get_connection(get_adversaire(packet->client_id));
+                int point_added = 0, point_added_adv = 0;
                 if (choice_adversaire->choice == data->choice == COLLABORER)
                 {
-                    adversaire_connection->points++;
-                    connection->points++;
+                    point_added_adv++;
+                    point_added++;
                 }
                 else if (choice_adversaire->choice == data->choice == TRAHIR)
                 {
-                    adversaire_connection->points -= 5;
-                    connection->points -= 5;
+                    point_added_adv -= 5;
+                    point_added -= 5;
                 }
                 else if (choice_adversaire->choice == COLLABORER && data->choice == TRAHIR)
                 {
-                    connection->points +=5;
+                    point_added +=5;
                 }
-                else
+                else if (choice_adversaire->choice == TRAHIR && data->choice == COLLABORER)
                 {
-                    adversaire_connection->points += 5;
+                    point_added_adv += 5;
                 }
+                adversaire_connection->points += point_added_adv;
+                connection->points += point_added;
                 Room* room = get_room(packet->client_id);
                 room->current_round++;
                 remove_client_choice(choice_adversaire);
                 if (room->current_round < room->rounds)
                 {
-                    Start_round_data data = {.winner = true, .round = room->current_round};
-                    Start_round_data adversaire_data = {.winner = false, .round = room->current_round};
+                    //export CSV
+                    Start_round_data data = {.winner = point_added > point_added_adv, .round = room->current_round};
+                    Start_round_data adversaire_data = {.winner = point_added_adv > point_added, .round = room->current_round};
                     send_packet(START_ROUND,packet->client_id, &data, connection->sockfd);
                     send_packet(START_ROUND,adversaire_connection->client_id, &adversaire_data, adversaire_connection->sockfd);
                 }
                 else
                 {
-                    End_game_data data = {.winner = true};
-                    End_game_data adversaire_data = {.winner = false};
+                    End_game_data data = {.winner = adversaire_connection->points < connection->points};
+                    End_game_data adversaire_data = {.winner = adversaire_connection->points > connection->points};
                     send_packet(END_GAME,packet->client_id,&data,connection->sockfd);
                     send_packet(END_GAME,adversaire_connection->client_id,&adversaire_data,adversaire_connection->sockfd);
                 }

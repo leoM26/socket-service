@@ -5,7 +5,6 @@
   <object class="GtkWindow" id="app_win">
     <property name="can_focus">False</property>
     <signal name="destroy" handler="on_window_main_destroy" swapped="no"/>
-    <signal name="show" handler="on_window_main_show" object="lb_progress_bar" swapped="no"/>
     <child>
       <object class="GtkBox">
         <property name="width_request">500</property>
@@ -28,7 +27,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLabel" id="lb_winner">
+          <object class="GtkLabel" id="lb_winner_msg">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <attributes>

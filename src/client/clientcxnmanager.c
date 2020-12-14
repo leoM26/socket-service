@@ -33,8 +33,9 @@ void *threadProcess(void *ptr)
         {
             Rep_connexion_data* data = parse_json(packet->json_data,packet->code_protocole);
             on_rep_connection(data);
+            printf("--------------------\n");
             printf("client_id : %d\n", packet->client_id);
-            printf("action : %d\n", packet->code_protocole);
+            printf("code protocole : %d\n", packet->code_protocole);
             printf("json : %s\n", packet->json_data);
         }
 
@@ -42,15 +43,17 @@ void *threadProcess(void *ptr)
         {
             Start_round_data* data = parse_json(packet->json_data,packet->code_protocole);
             on_round_start(data);
+            printf("--------------------\n");
             printf("client_id : %d\n", packet->client_id);
-            printf("action : %d\n", packet->code_protocole);
+            printf("code protocole : %d\n", packet->code_protocole);
             printf("json : %s\n", packet->json_data);
         }
         if (packet->code_protocole == END_GAME)
         {
             End_game_data* data = parse_json(packet->json_data,packet->code_protocole);
             on_end_game(data);
-            printf("action : %d\n", packet->code_protocole);
+            printf("--------------------\n");
+            printf("code protocole : %d\n", packet->code_protocole);
             printf("json : %s\n", packet->json_data);
         }
         
