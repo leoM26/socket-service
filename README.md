@@ -15,3 +15,6 @@ Etapes de production :
 
 - fonction remove, faire les calculs(fait)
 - faire les affichages sur glade
+- temps de réaction
+
+

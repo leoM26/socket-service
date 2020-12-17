@@ -173,8 +173,9 @@ void *threadProcess(void *ptr)
                 if (room->current_round < room->rounds)
                 {
                     //export CSV
-                    write_line(data, room->current_round-1);
-                    write_line(choice_adversaire,room->current_round-1);
+                    Round_choice choice = {.choice = data->choice, .time = data->time, .client_id = connection->client_id};
+                    write_line(&choice, room->current_round);
+                    write_line(choice_adversaire,room->current_round);
                     Start_round_data data = {.winner = point_added > point_added_adv, .round = room->current_round};
                     Start_round_data adversaire_data = {.winner = point_added_adv > point_added, .round = room->current_round};
                     send_packet(START_ROUND,packet->client_id, &data, connection->sockfd);
