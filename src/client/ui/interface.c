@@ -127,7 +127,7 @@ void btn_send_clicked(GtkButton *button)
     printf("bouton 'Envoyer réponse' clicked\n");
     if (choix != 0)
     {
-        Choice_data data = {.choice = choix, .time = 0};
+        Choice_data data = {.choice = choix, .time = elapsed_time};
         send_packet(CHOICE, get_config()->name, &data, get_socket());
     }
 }
