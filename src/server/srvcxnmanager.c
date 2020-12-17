@@ -12,6 +12,7 @@
 #include "../commun/paquet.h"
 #include "game/game.h"
 #include "config/config.h"
+#include "results_csv/result.h"
 
 connection_t *connections[MAXSIMULTANEOUSCLIENTS];
 
@@ -117,6 +118,7 @@ void *threadProcess(void *ptr)
 
             if (adversaire_connection != NULL)
             {
+                write_header();
                 Room *room = get_room(packet->client_id);
                 room->current_round = 0;
                 Start_round_data round_data = {.winner = true,.round = room->current_round};
@@ -136,6 +138,7 @@ void *threadProcess(void *ptr)
             if (choice_adversaire == NULL)
             {
                 Round_choice *choice = malloc(sizeof(Round_choice));
+                choice->time = data->time;
                 choice->client_id = packet->client_id;
                 choice->choice = data->choice;
                 add_round_choice(choice);
@@ -170,6 +173,8 @@ void *threadProcess(void *ptr)
                 if (room->current_round < room->rounds)
                 {
                     //export CSV
+                    write_line(data, room->current_round-1);
+                    write_line(choice_adversaire,room->current_round-1);
                     Start_round_data data = {.winner = point_added > point_added_adv, .round = room->current_round};
                     Start_round_data adversaire_data = {.winner = point_added_adv > point_added, .round = room->current_round};
                     send_packet(START_ROUND,packet->client_id, &data, connection->sockfd);

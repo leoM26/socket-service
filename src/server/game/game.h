@@ -5,6 +5,7 @@ typedef struct
 {
     int client_id;
     int choice;
+    double time;
 } Round_choice;
 
 enum choice{
