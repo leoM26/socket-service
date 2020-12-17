@@ -18,22 +18,31 @@ void rep_connection()
 
 void round_start(int winner, int round)
 {
-    GtkLabel *label = GTK_LABEL(gtk_builder_get_object(builder, "lb_evenement_msg"));
-    gtk_label_set_text(label, "Faites vos jeux !");
+    GtkLabel *evenement = GTK_LABEL(gtk_builder_get_object(builder, "lb_evenement_msg"));
+    gtk_label_set_text(evenement, "Faites vos jeux !");
     if (round != 0)
     {
         GtkLabel *label = GTK_LABEL(gtk_builder_get_object(builder, "lb_winner_msg"));
         if (winner == 3)
         {
             gtk_label_set_text(label, "Personne n'a gagné ce round");
+            gtk_label_set_text(evenement, "Vous gagnez 1 point");
         }
+        else if (winner == 4)
+        {
+            gtk_label_set_text(label, "Personne n'a gagné ce round");
+            gtk_label_set_text(evenement, "Vous perdez 5 points");
+        }
+        
         else if (winner == 1)
         {
             gtk_label_set_text(label, "Vous avez gagné ce round !");
+            gtk_label_set_text(evenement, "Vous ne gagner pas de point");
         }
         else if (winner == 2)
         {
             gtk_label_set_text(label, "Vous avez perdu ce round !");
+            gtk_label_set_text(evenement, "Vous gagner 5 points");
         }
     }
     GtkLabel *round_label = GTK_LABEL(gtk_builder_get_object(builder, "lb_round_msg"));

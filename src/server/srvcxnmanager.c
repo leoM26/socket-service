@@ -148,28 +148,28 @@ void *threadProcess(void *ptr)
                 connection_t *adversaire_connection = get_connection(get_adversaire(packet->client_id));
                 int point_added = 0, point_added_adv = 0;
                 int winner = 0, winner_adv = 0;
-                if (choice_adversaire->choice == data->choice == COLLABORER)
+                if (choice_adversaire->choice == COLLABORER && data->choice == COLLABORER)
                 {
-                    winner = winner_adv = 3;
+                    winner = winner_adv = 3;//egalité collaborer
                     point_added_adv++;
                     point_added++;
                 }
-                else if (choice_adversaire->choice == data->choice == TRAHIR)
+                else if (choice_adversaire->choice == TRAHIR && data->choice == TRAHIR)
                 {
-                    winner = winner_adv = 3;
+                    winner = winner_adv = 4;//egalité trahir
                     point_added_adv -= 5;
                     point_added -= 5;
                 }
                 else if (choice_adversaire->choice == COLLABORER && data->choice == TRAHIR)
                 {
-                    winner = 1;
-                    winner_adv = 2;
+                    winner = 1;//gagnant
+                    winner_adv = 2;//perdant
                     point_added +=5;
                 }
                 else if (choice_adversaire->choice == TRAHIR && data->choice == COLLABORER)
                 {
-                    winner = 2;
-                    winner_adv = 1;
+                    winner = 2;//perdant
+                    winner_adv = 1;//gagnant
                     point_added_adv += 5;
                 }
                 adversaire_connection->points += point_added_adv;
