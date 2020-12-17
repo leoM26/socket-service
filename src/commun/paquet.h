@@ -13,7 +13,7 @@ typedef struct {
 }Rep_connexion_data;
 
 typedef struct {
-    bool winner;
+    int winner;
     int round;
 }Start_round_data;
 

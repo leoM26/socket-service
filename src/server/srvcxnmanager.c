@@ -147,22 +147,29 @@ void *threadProcess(void *ptr)
             {
                 connection_t *adversaire_connection = get_connection(get_adversaire(packet->client_id));
                 int point_added = 0, point_added_adv = 0;
+                int winner = 0, winner_adv = 0;
                 if (choice_adversaire->choice == data->choice == COLLABORER)
                 {
+                    winner = winner_adv = 3;
                     point_added_adv++;
                     point_added++;
                 }
                 else if (choice_adversaire->choice == data->choice == TRAHIR)
                 {
+                    winner = winner_adv = 3;
                     point_added_adv -= 5;
                     point_added -= 5;
                 }
                 else if (choice_adversaire->choice == COLLABORER && data->choice == TRAHIR)
                 {
+                    winner = 1;
+                    winner_adv = 2;
                     point_added +=5;
                 }
                 else if (choice_adversaire->choice == TRAHIR && data->choice == COLLABORER)
                 {
+                    winner = 2;
+                    winner_adv = 1;
                     point_added_adv += 5;
                 }
                 adversaire_connection->points += point_added_adv;
@@ -174,10 +181,10 @@ void *threadProcess(void *ptr)
                 {
                     //export CSV
                     Round_choice choice = {.choice = data->choice, .time = data->time, .client_id = connection->client_id};
-                    write_line(&choice, room->current_round);
-                    write_line(choice_adversaire,room->current_round);
-                    Start_round_data data = {.winner = point_added > point_added_adv, .round = room->current_round};
-                    Start_round_data adversaire_data = {.winner = point_added_adv > point_added, .round = room->current_round};
+                    write_line(&choice, room->current_round, point_added, connection->points);
+                    write_line(choice_adversaire,room->current_round, point_added_adv, adversaire_connection->points);
+                    Start_round_data data = {.winner = winner, .round = room->current_round};
+                    Start_round_data adversaire_data = {.winner = winner_adv, .round = room->current_round};
                     send_packet(START_ROUND,packet->client_id, &data, connection->sockfd);
                     send_packet(START_ROUND,adversaire_connection->client_id, &adversaire_data, adversaire_connection->sockfd);
                 }
@@ -191,18 +198,6 @@ void *threadProcess(void *ptr)
             
             }
         }
-
-        //-> Quand un client fait un choix
-
-        //si choix de l'adversaire n'est pas stocké get_client_choice(get_adversaire_id(connection->client_id))
-
-        //add_client_choice(mon_choix)
-
-        //sinon
-        //Récupère le choix de l'adversaire
-        //Je détermine qui a gagné  0 -> 0 |  1 -> 1 | 0 -> 1
-        //IMPORTANT : adversaire_choice = NULL
-        //Envoie aux deux client qui a gagné
 
         //       if (strncmp(buffer_in, "bye", 3) == 0) {
         //           break;

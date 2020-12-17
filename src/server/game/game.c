@@ -43,16 +43,3 @@ void remove_client_choice(Round_choice* choice)
         }    
     }      
 }
-
-
-//-> Quand un client fait un choix
-
-//si choix de l'adversaire n'est pas stocké get_client_choice(get_adversaire_id(connection->client_id))
-
-    //add_client_choice(mon_choix)
-
-//sinon
-    //Récupère le choix de l'adversaire
-    //Je détermine qui a gagné  0 -> 0 |  1 -> 1 | 0 -> 1
-    //IMPORTANT : adversaire_choice = NULL
-    //Envoie aux deux client qui a gagné
