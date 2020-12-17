@@ -24,7 +24,7 @@ char *convert_data_to_json(enum code_protocol code, void *data)
     case START_ROUND:
     {
         Start_round_data *results = (Start_round_data *)data;
-        json_object_object_add(object, "winner", json_object_new_boolean(results->winner));
+        json_object_object_add(object, "winner", json_object_new_int(results->winner));
         json_object_object_add(object, "round", json_object_new_int(results->round));
         break;
     }
@@ -38,7 +38,7 @@ char *convert_data_to_json(enum code_protocol code, void *data)
     case END_GAME:
     {
         End_game_data *results = (End_game_data *)data;
-        json_object_object_add(object, "winner", json_object_new_boolean(results->winner));
+        json_object_object_add(object, "winner", json_object_new_int(results->winner));
         break;
     }
     case STOP_CONNEXION:
@@ -69,15 +69,15 @@ void *parse_json(char *json, enum code_protocol code)
         json_object *round_object = json_object_object_get(object, "round");
         json_object *winner_object = json_object_object_get(object, "winner");
         data->round = json_object_get_int(round_object);
-        data->winner = json_object_get_boolean(winner_object);
+        data->winner = json_object_get_int(winner_object);
         return data;
         break;
     }
     case CHOICE:
     {
+        Choice_data *data = (Choice_data *)malloc(sizeof(Choice_data));
         json_object *choice_object = json_object_object_get(object, "choice");
         json_object *time_object = json_object_object_get(object, "time");
-        Choice_data *data = (Choice_data *)malloc(sizeof(Choice_data));
         data->choice = json_object_get_int(choice_object);
         data->time = json_object_get_double(time_object);
         return data;

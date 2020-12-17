@@ -23,7 +23,7 @@ typedef struct {
 }Choice_data;
 
 typedef struct {
-    bool winner;
+    int winner;
 }End_game_data;
 
 

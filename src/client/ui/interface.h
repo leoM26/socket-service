@@ -3,6 +3,6 @@
 
 void rep_connection();
 void round_start();
-void end_game(bool winner);
+void end_game(int winner);
 void interface_start(int argc,char **argv);
 #endif

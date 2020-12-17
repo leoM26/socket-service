@@ -16,18 +16,22 @@ void rep_connection()
     gtk_label_set_text(label, "Vous etes actuellement dans la salle d'attente");
 }
 
-void round_start(bool winner, int round)
+void round_start(int winner, int round)
 {
     GtkLabel *label = GTK_LABEL(gtk_builder_get_object(builder, "lb_evenement_msg"));
     gtk_label_set_text(label, "Faites vos jeux !");
     if (round != 0)
     {
         GtkLabel *label = GTK_LABEL(gtk_builder_get_object(builder, "lb_winner_msg"));
-        if (winner)
+        if (winner == 3)
+        {
+            gtk_label_set_text(label, "Personne n'a gagné ce round");
+        }
+        else if (winner == 1)
         {
             gtk_label_set_text(label, "Vous avez gagné ce round !");
         }
-        else
+        else if (winner == 2)
         {
             gtk_label_set_text(label, "Vous avez perdu ce round !");
         }
@@ -42,17 +46,13 @@ void end_game(int winner)
 {
     GtkLabel *label = GTK_LABEL(gtk_builder_get_object(builder, "lb_evennement_msg"));
 
-    if (winner = 3)
+    if (winner)
     {
-        gtk_label_set_text(label, "Personne n'a gagné ce round");
+        gtk_label_set_text(label, "Bravo ! Vous etes le gagnant");
     }
-    else if (winner = 1)
+    else
     {
-        gtk_label_set_text(label, "Vous avez gagné ce round !");
-    }
-    else if (winner = 2)
-    {
-        gtk_label_set_text(label, "Vous avez perdu ce round !");
+        gtk_label_set_text(label, "Dommage ! Vous avez perdu");
     }
 }
 

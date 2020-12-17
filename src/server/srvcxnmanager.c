@@ -121,7 +121,7 @@ void *threadProcess(void *ptr)
                 write_header();
                 Room *room = get_room(packet->client_id);
                 room->current_round = 0;
-                Start_round_data round_data = {.winner = true,.round = room->current_round};
+                Start_round_data round_data = {.winner = 0,.round = room->current_round};
                 send_packet(START_ROUND, packet->client_id, &round_data, connection->sockfd);
                 send_packet(START_ROUND, adversaire_connection->client_id, &round_data, adversaire_connection->sockfd);
             }
