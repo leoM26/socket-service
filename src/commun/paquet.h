@@ -15,6 +15,7 @@ typedef struct {
 typedef struct {
     int winner;
     int round;
+    int points;
 }Start_round_data;
 
 typedef struct {

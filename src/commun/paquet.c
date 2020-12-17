@@ -26,6 +26,7 @@ char *convert_data_to_json(enum code_protocol code, void *data)
         Start_round_data *results = (Start_round_data *)data;
         json_object_object_add(object, "winner", json_object_new_int(results->winner));
         json_object_object_add(object, "round", json_object_new_int(results->round));
+        json_object_object_add(object, "points", json_object_new_int(results->points));
         break;
     }
     case CHOICE:
@@ -68,8 +69,10 @@ void *parse_json(char *json, enum code_protocol code)
         Start_round_data *data = (Start_round_data *)malloc(sizeof(Start_round_data));
         json_object *round_object = json_object_object_get(object, "round");
         json_object *winner_object = json_object_object_get(object, "winner");
+        json_object *points_object = json_object_object_get(object, "points");
         data->round = json_object_get_int(round_object);
         data->winner = json_object_get_int(winner_object);
+        data->points = json_object_get_int(points_object);
         return data;
         break;
     }

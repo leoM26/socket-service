@@ -52,7 +52,7 @@
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Round :</property>
                 <attributes>
-                  <attribute name="font-desc" value="Sans Bold 11"/>
+                  <attribute name="font-desc" value="Sans Bold 12"/>
                 </attributes>
               </object>
               <packing>
@@ -66,7 +66,7 @@
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Evenement :</property>
                 <attributes>
-                  <attribute name="font-desc" value="Sans Bold 11"/>
+                  <attribute name="font-desc" value="Sans Bold 12"/>
                 </attributes>
               </object>
               <packing>
@@ -91,6 +91,9 @@
               <object class="GtkLabel" id="lb_round_msg">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <attributes>
+                  <attribute name="font-desc" value="Sans Bold 12"/>
+                </attributes>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -101,6 +104,9 @@
               <object class="GtkLabel" id="lb_evenement_msg">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <attributes>
+                  <attribute name="font-desc" value="Sans Bold 12"/>
+                </attributes>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -120,88 +126,10 @@
             <property name="can_focus">False</property>
             <property name="column_homogeneous">True</property>
             <child>
-              <object class="GtkButton" id="btn_mise1">
-                <property name="label" translatable="yes">Mise 1</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <signal name="clicked" handler="btn_mise1_clicked" object="lb_bet_msg" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="btn_mise2">
-                <property name="label" translatable="yes">Mise 2</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <signal name="clicked" handler="btn_mise2_clicked" object="lb_bet_msg" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="btn_mise3">
-                <property name="label" translatable="yes">Mise 3</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <signal name="clicked" handler="btn_mise3_clicked" object="lb_bet_msg" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="btn_mise4">
-                <property name="label" translatable="yes">Mise 4</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <signal name="clicked" handler="btn_mise4_clicked" object="lb_bet_msg" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="btn_mise5">
-                <property name="label" translatable="yes">Mise 5</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <signal name="clicked" handler="btn_mise5_clicked" object="lb_bet_msg" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">4</property>
-                <property name="top_attach">0</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="padding">15</property>
-            <property name="position">4</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkGrid">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="column_homogeneous">True</property>
-            <child>
-              <object class="GtkLabel" id="lb_bet">
+              <object class="GtkLabel" id="lb_points">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Mise :</property>
+                <property name="label" translatable="yes">Points :</property>
                 <attributes>
                   <attribute name="font-desc" value="Sans Bold 10"/>
                 </attributes>
@@ -226,7 +154,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="lb_bet_msg">
+              <object class="GtkLabel" id="lb_points_msg">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
               </object>
@@ -249,6 +177,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
+            <property name="padding">35</property>
             <property name="position">5</property>
           </packing>
         </child>

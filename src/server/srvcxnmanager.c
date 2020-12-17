@@ -183,8 +183,8 @@ void *threadProcess(void *ptr)
                     Round_choice choice = {.choice = data->choice, .time = data->time, .client_id = connection->client_id};
                     write_line(&choice, room->current_round, point_added, connection->points);
                     write_line(choice_adversaire,room->current_round, point_added_adv, adversaire_connection->points);
-                    Start_round_data data = {.winner = winner, .round = room->current_round};
-                    Start_round_data adversaire_data = {.winner = winner_adv, .round = room->current_round};
+                    Start_round_data data = {.winner = winner, .round = room->current_round, .points = connection->points};
+                    Start_round_data adversaire_data = {.winner = winner_adv, .round = room->current_round, .points = adversaire_connection->points};
                     send_packet(START_ROUND,packet->client_id, &data, connection->sockfd);
                     send_packet(START_ROUND,adversaire_connection->client_id, &adversaire_data, adversaire_connection->sockfd);
                 }

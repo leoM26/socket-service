@@ -16,7 +16,7 @@ void rep_connection()
     gtk_label_set_text(label, "Vous etes actuellement dans la salle d'attente");
 }
 
-void round_start(int winner, int round)
+void round_start(int winner, int round, int points)
 {
     GtkLabel *evenement = GTK_LABEL(gtk_builder_get_object(builder, "lb_evenement_msg"));
     gtk_label_set_text(evenement, "Faites vos jeux !");
@@ -37,18 +37,23 @@ void round_start(int winner, int round)
         else if (winner == 1)
         {
             gtk_label_set_text(label, "Vous avez gagné ce round !");
-            gtk_label_set_text(evenement, "Vous ne gagner pas de point");
+            gtk_label_set_text(evenement, "Vous gagner 5 points");
         }
         else if (winner == 2)
         {
             gtk_label_set_text(label, "Vous avez perdu ce round !");
-            gtk_label_set_text(evenement, "Vous gagner 5 points");
+            gtk_label_set_text(evenement, "Vous ne gagner pas de point");
         }
     }
     GtkLabel *round_label = GTK_LABEL(gtk_builder_get_object(builder, "lb_round_msg"));
-    char title[3];
-    sprintf(title, "%d", round);
-    gtk_label_set_text(round_label, title);
+    char title_round[3];
+    sprintf(title_round, "%d", round);
+    gtk_label_set_text(round_label, title_round);
+
+    GtkLabel *points_label = GTK_LABEL(gtk_builder_get_object(builder, "lb_points_msg"));
+    char title_points[3];
+    sprintf(title_points, "%d", points);
+    gtk_label_set_text(points_label, title_points);    
 }
 
 void end_game(int winner)
@@ -90,36 +95,6 @@ void btn_trahir_clicked(GtkButton *button, GtkLabel *label)
     printf("bouton 'Trahir' clicked\n");
     gtk_label_set_text(GTK_LABEL(label), (const gchar *)"Trahir");
     choix = 1;
-}
-
-void btn_mise1_clicked(GtkButton *button, GtkLabel *label)
-{
-    printf("bouton 'Mise 1' clicked\n");
-    gtk_label_set_text(GTK_LABEL(label), (const gchar *)"Mise 1");
-}
-
-void btn_mise2_clicked(GtkButton *button, GtkLabel *label)
-{
-    printf("bouton 'Mise 2' clicked\n");
-    gtk_label_set_text(GTK_LABEL(label), (const gchar *)"Mise 2");
-}
-
-void btn_mise3_clicked(GtkButton *button, GtkLabel *label)
-{
-    printf("bouton 'Mise 3' clicked\n");
-    gtk_label_set_text(GTK_LABEL(label), (const gchar *)"Mise 3");
-}
-
-void btn_mise4_clicked(GtkButton *button, GtkLabel *label)
-{
-    printf("bouton 'Mise 4' clicked\n");
-    gtk_label_set_text(GTK_LABEL(label), (const gchar *)"Mise 4");
-}
-
-void btn_mise5_clicked(GtkButton *button, GtkLabel *label)
-{
-    printf("bouton 'Mise 5' clicked\n");
-    gtk_label_set_text(GTK_LABEL(label), (const gchar *)"Mise 5");
 }
 
 void btn_send_clicked(GtkButton *button)
