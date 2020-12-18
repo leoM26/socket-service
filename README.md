@@ -1,5 +1,34 @@
-# Dilemme du prisonnier
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://www.flaticon.com/svg/static/icons/svg/3903/3903552.svg">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
+
+  <h3 align="center">Projet C</h3>
+
+  <p align="center">
+    Dilemme du prisonnier
+    <br />
+    <a href=""><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="">View Demo</a>
+    ·
+    <a href="">Report Bug</a>
+    ·
+    <a href="">Request Feature</a>
+  </p>
+</p>
+
+# Dilemme du prisonnier 
 ## Installation
 
 ### Prérequis :
@@ -20,7 +49,7 @@ make all
 ./output/client
 ```
 
-### Configurations :
+## Configurations
 
 **Pour le serveur :** 
 
