@@ -1,9 +1,11 @@
+<!--
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
+--!>
 
 <!-- PROJECT LOGO -->
 <br />
@@ -28,7 +30,35 @@
   </p>
 </p>
 
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary><h2 style="display: inline-block">Sommaire</h2></summary>
+  <ol>
+    <li>
+      <a href="#contexte">Contexte</a>
+    </li>
+    <li>
+      <a href="#installation">Installation</a>
+      <ul>
+        <li><a href="#prérequis">Prérequis</a></li>
+        <li><a href="#git-clone">Git clone</a></li>
+      </ul>
+    </li>
+    <li>
+    <a href="#configurations">Configurations</a>
+    <ul>
+        <li><a href="#pour-le-serveur">Serveur</a></li>
+        <li><a href="#pour-les-clients">Clients</a></li>
+      </ul>
+    </li>
+    <li><a href="#règle-du-jeu">Règle jeu</a></li>
+    <li><a href="#résultat-jeu">Résultat jeu</a></li>
+  </ol>
+</details>
+
 # Dilemme du prisonnier 
+
+## Contexte
 ## Installation
 
 ### Prérequis :
@@ -51,7 +81,7 @@ make all
 
 ## Configurations
 
-**Pour le serveur :** 
+### Pour le serveur : 
 
  Il est possible d'ajuster des éléments de configuration dans le fichier `server_config.cfg`.
 
@@ -81,7 +111,7 @@ game_configuration =
 );
 ```
 
-**Pour les clients :**
+### Pour les clients :
 
  Vous pouvez ajuster l'adresse IP pour jouer en réseau ainsi que l'id du client dans `client_config.cfg`.
 
@@ -100,7 +130,7 @@ Si vous choissisez tous les deux `Trahir` : Vous perderez **5** points chacun.
 
 Si vous choissisez `Collaborer` et votre adversaire `Trahir` : Vous ne gagnerez pas de point alors que votre adversaire en gagnera **5** points.
 Si vous choissisez `Trahir` et votre adversaire `Collaborer` : Vous gagnerez **5** points alors que votre adversaire n'en gagnera pas.
-## Resultat jeu
+## Résultat jeu
 
 Les résultats de votre partie seront enregistrés dans le dossier `exports` dans un fichier nommé `results.csv`.
 
