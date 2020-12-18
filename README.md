@@ -8,7 +8,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://www.flaticon.com/svg/static/icons/svg/3903/3903552.svg">
+  <a href="https://github.com/leoM26/socket-service">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
