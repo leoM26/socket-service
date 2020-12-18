@@ -1,3 +1,9 @@
+/*
+ * Created on Fri Dec 18 2020
+ *
+ * Copyright (c) 2020 Léo Albouy & Louis Clement & Max Fournier & Térence Epinat
+ */
+
 #ifndef LISTENER_HEADER_FILE_H
 #define LISTENER_HEADER_FILE_H
 

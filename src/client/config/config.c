@@ -1,13 +1,29 @@
+/*
+ * Created on Fri Dec 18 2020
+ *
+ * Copyright (c) 2020 Léo Albouy & Louis Clement & Max Fournier & Térence Epinat
+ */
 #include <stdlib.h>
 #include <libconfig.h>
 #include "config.h"
 
 Config* config = NULL;
 
+/**
+ * @brief  Get configuration
+ * 
+ * @return Config*
+ */
 Config* get_config(){
     return config;
 }
 
+/**
+ * @brief  Read configuration file for client
+ *   
+ * @param  configuration: current configuration
+ * @param  filename: name of configuration file
+ */
 void read_config(Config *configuration, char *filename){
     config_t cfg;
     config_setting_t *setting;

@@ -41,7 +41,7 @@
       <a href="#installation">Installation</a>
       <ul>
         <li><a href="#prérequis">Prérequis</a></li>
-        <li><a href="#git-clone">Git clone</a></li>
+        <li><a href="#utilisation">Utilisation</a></li>
       </ul>
     </li>
     <li>
@@ -59,23 +59,31 @@
 # Dilemme du prisonnier 
 
 ## Contexte
+
+l’ICS (institue of Cognitives Sciences) est un laboratoire interdisciplinaire qui intègre l'expertise de chercheurs des Sciences de la Vie (psychologie cognitive, neurosciences) et de médecine (pédo- psychiatrie, neuro-pediatrie) avec celle de chercheurs des Sciences Humaines et Sociales (linguistique computationelle et théorique et philosophie) pour étudier la nature et la spécificité de l'esprit humain.
+
+Le doctorant, qui n’est pas un développeur, a besoin d’accumuler des données expérimentales. Il a besoin que des volontaires jouent l’un contre l’autre un nombre de fois à définir, sans jamais savoir qui sont leurs adversaires.
 ## Installation
 
 ### Prérequis :
 
-Vérifier les bibliothèques sur Fedora: 
+Vérifier les bibliothèques suivante sur Fedora: 
 - libconfig-devel
 - json-c-devel
 
-### Git clone :
+### Utilisation :
 
 ```bash
 git clone https://github.com/leoM26/socket-service.git
 cd socket-service/
+
+#Compiler le projet
 make all
-#Pour le serveur
+
+#Executer le serveur
 ./output/server
-#Pour les clients
+
+#Executer les clients
 ./output/client
 ```
 

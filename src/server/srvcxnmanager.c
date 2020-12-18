@@ -1,3 +1,8 @@
+/*
+ * Created on Fri Dec 18 2020
+ *
+ * Copyright (c) 2020 Léo Albouy & Louis Clement & Max Fournier & Térence Epinat
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,6 +21,10 @@
 
 connection_t *connections[MAXSIMULTANEOUSCLIENTS];
 
+/**
+ * @brief  Init sockets array
+ *  
+ */
 void init_sockets_array()
 {
     for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++)
@@ -24,6 +33,11 @@ void init_sockets_array()
     }
 }
 
+/**
+ * @brief Added connection
+ *    
+ * @param  connection: 
+ */
 void add(connection_t *connection)
 {
     for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++)
@@ -38,6 +52,12 @@ void add(connection_t *connection)
     exit(-5);
 }
 
+/**
+ * @brief  Get connection
+ *   
+ * @param  client_id: identifier of client
+ * @return NULL 
+ */
 connection_t *get_connection(int client_id)
 {
     for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++)
@@ -53,6 +73,11 @@ connection_t *get_connection(int client_id)
     return NULL;
 }
 
+/**
+ * @brief  Delete connection
+ * 
+ * @param  connection: 
+ */
 void del(connection_t *connection)
 {
     for (int i = 0; i < MAXSIMULTANEOUSCLIENTS; i++)
@@ -76,6 +101,12 @@ pthread_mutex_unlock(&lock);
  * Thread allowing server to handle multiple client connections
  * @param ptr connection_t 
  * @return 
+ */
+
+/**
+ * @brief  Thread process
+ *   
+ * @param  *ptr: 
  */
 void *threadProcess(void *ptr)
 {
@@ -240,6 +271,11 @@ void *threadProcess(void *ptr)
     pthread_exit(0);
 }
 
+/**
+ * @brief  Create server socket
+ * 
+ * @return sockfd 
+ */
 int create_server_socket()
 {
     int sockfd = -1;

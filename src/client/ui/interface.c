@@ -1,3 +1,9 @@
+/*
+ * Created on Fri Dec 18 2020
+ *
+ * Copyright (c) 2020 Léo Albouy & Louis Clement & Max Fournier & Térence Epinat
+ */
+
 #include <gtk/gtk.h>
 
 #include "../../commun/paquet.h"
@@ -10,6 +16,12 @@ int choix = 0;
 int time_id = 0;
 int elapsed_time = 30;
 
+
+/**
+ * @brief 
+ *   
+ * @return 
+ */
 int timer_handler()
 {
     if (elapsed_time > 0)
@@ -21,25 +33,25 @@ int timer_handler()
         gtk_label_set_text(timelabel, txt);
         return 1;
     }
-    //elapsed_time = 30;
 }
 
-//int timer(){
-//    GTimer *timer = g_timer_new();
-//    g_timer_start(timer);
-//    char txt[100];
-//    GtkLabel *timelabel = GTK_LABEL(gtk_builder_get_object(builder, "lb_time_msg"));
-//    snprintf(txt, 100, "%02i", timer);
-//    gtk_label_set_text(timelabel, txt);
-//    return 1;
-//}
-
+/**
+ * @brief Reply connection
+ *   
+ */
 void rep_connection()
 {
     GtkLabel *label = GTK_LABEL(gtk_builder_get_object(builder, "lb_evenement_msg"));
     gtk_label_set_text(label, "Vous etes actuellement dans la salle d'attente");
 }
 
+/**
+ * @brief  Start round
+ *   
+ * @param  winner: display winner of round
+ * @param  round: display current round
+ * @param  points: display points of player
+ */
 void round_start(int winner, int round, int points)
 {
     GtkLabel *evenement = GTK_LABEL(gtk_builder_get_object(builder, "lb_evenement_msg"));
@@ -80,6 +92,11 @@ void round_start(int winner, int round, int points)
     gtk_label_set_text(points_label, title_points);
 }
 
+/**
+ * @brief End game 
+ *   
+ * @param  winner: display winner at the end of the game 
+ */
 void end_game(int winner)
 {
     GtkLabel *label = GTK_LABEL(gtk_builder_get_object(builder, "lb_evennement_msg"));
@@ -94,6 +111,12 @@ void end_game(int winner)
     }
 }
 
+/**
+ * @brief  Button collaborer clicked
+ * 
+ * @param  button: button clicked
+ * @param  label: change text of label
+ */
 void btn_collaborer_clicked(GtkButton *button, GtkLabel *label)
 {
     printf("bouton 'Collaborer' clicked\n");
@@ -101,6 +124,12 @@ void btn_collaborer_clicked(GtkButton *button, GtkLabel *label)
     choix = 2;
 }
 
+/**
+ * @brief  Button Trahir clicked
+ * 
+ * @param  button: button clicked
+ * @param  label: change text of label
+ */
 void btn_trahir_clicked(GtkButton *button, GtkLabel *label)
 {
     printf("bouton 'Trahir' clicked\n");
@@ -108,6 +137,11 @@ void btn_trahir_clicked(GtkButton *button, GtkLabel *label)
     choix = 1;
 }
 
+/**
+ * @brief  Button Send clicked
+ *  
+ * @param  button: button clicked
+ */
 void btn_send_clicked(GtkButton *button)
 {
     printf("bouton 'Envoyer réponse' clicked\n");
@@ -118,17 +152,31 @@ void btn_send_clicked(GtkButton *button)
     }
 }
 
+/**
+ * @brief  Debug display main window
+ *  
+ */
 void on_window_main_show()
 {
     printf("window open\n");
 }
 
+/**
+ * @brief  Debug close main window
+ *  
+ */
 void on_window_main_destroy()
 {
     printf("window close\n");
     gtk_main_quit();
 }
 
+/**
+ * @brief  Init & start main window
+ *   
+ * @param  argc: 
+ * @param  argv: 
+ */
 void interface_start(int argc, char **argv)
 {
     GtkWidget *win;

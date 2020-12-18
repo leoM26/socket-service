@@ -1,7 +1,20 @@
+/*
+ * Created on Fri Dec 18 2020
+ *
+ * Copyright (c) 2020 Léo Albouy & Louis Clement & Max Fournier & Térence Epinat
+ */
+
 #include <json-c/json.h>
 #include <string.h>
 #include "paquet.h"
 
+/**
+ * @brief  Converting data to JSON format
+ *
+ * @param  code: code of protocol
+ * @param  data: data convert to json
+ * @return json_object
+ */
 char *convert_data_to_json(enum code_protocol code, void *data)
 {
 
@@ -51,6 +64,12 @@ char *convert_data_to_json(enum code_protocol code, void *data)
     return json_object_get_string(object);
 }
 
+/**
+ * @brief  Converting JSON to data
+ *   
+ * @param  json: 
+ * @param  code: code of protocol
+ */
 void *parse_json(char *json, enum code_protocol code)
 {
     json_object *object = json_tokener_parse(json);
@@ -96,6 +115,14 @@ void *parse_json(char *json, enum code_protocol code)
     }
 }
 
+/**
+ * @brief  Send packet
+ * 
+ * @param  code: code of protocol
+ * @param  client_id: identifier of client 
+ * @param  data: 
+ * @param  sockfd: socket 
+ */
 void send_packet(enum code_protocol code, int client_id, void *data, int sockfd)
 {
     Paquet paquet;

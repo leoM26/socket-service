@@ -1,3 +1,9 @@
+/*
+ * Created on Fri Dec 18 2020
+ *
+ * Copyright (c) 2020 Léo Albouy & Louis Clement & Max Fournier & Térence Epinat
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -70,6 +76,12 @@ void *threadProcess(void *ptr)
     printf("client pthread ended, len=%d\n", len);
 }
 
+/**
+ * @brief  Open connection with server
+ *  
+ * @param  cfg: client configuration
+ * @return Socket
+ */
 int open_connection(Config *cfg)
 {
     int sockfd;
@@ -101,6 +113,11 @@ int open_connection(Config *cfg)
     return sockfd;
 }
 
+/**
+ * @brief  Get socket
+ *   
+ * @return Socket 
+ */
 int get_socket(void){
     return Socket;
 }

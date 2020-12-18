@@ -1,13 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   main.c
- * Author: aurelio
+ * Created on Fri Dec 18 2020
  *
+ * Copyright (c) 2020 Léo Albouy & Louis Clement & Max Fournier & Térence Epinat
  */
 
 #include <stdio.h>
@@ -25,10 +19,11 @@
 #include "../commun/paquet.h"
 #include "ui/interface.h"
 
-/*
- * 
+/**
+ * @brief  Debug thread on terminal
+ *   
+ * @param  socket: 
  */
-
 void thread_terminal(int *socket) {
 
     int status;
@@ -42,6 +37,12 @@ void thread_terminal(int *socket) {
     } while (status != -1);
 }
 
+/**
+ * @brief  Main client
+ *   
+ * @param  argc: 
+ * @param  argv: 
+ */
 int main(int argc, char **argv)
 {
     Config cfg;

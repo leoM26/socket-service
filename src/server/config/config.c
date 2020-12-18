@@ -1,3 +1,9 @@
+/*
+ * Created on Fri Dec 18 2020
+ *
+ * Copyright (c) 2020 Léo Albouy & Louis Clement & Max Fournier & Térence Epinat
+ */
+
 #include <stdlib.h>
 #include <libconfig.h>
 #include <assert.h>
@@ -9,7 +15,12 @@
 
 Config *conf = NULL;
 
-
+/**
+ * @brief  Parse game configuration
+ *   
+ * @param  game_configuration: game configuration in struct GameConfiguration
+ * @param  settings: settings in struct config_setting_t
+ */
 void parse_game_configuration(GameConfiguration *game_configuration, config_setting_t *settings)
 {
     game_configuration->nb_room = config_setting_length(settings);
@@ -33,6 +44,12 @@ void parse_game_configuration(GameConfiguration *game_configuration, config_sett
     }
 }
 
+/**
+ * @brief  Read configuration file for server
+ *   
+ * @param  configuration: current configuration
+ * @param  filename: name of configuration file
+ */
 void read_config(Config *config, char *filename)
 {
     config_t cfg;
@@ -59,6 +76,12 @@ void read_config(Config *config, char *filename)
     }
 }
 
+/**
+ * @brief Get room
+ *   
+ * @param  client_id: identifier of client
+ * @return *Room 
+ */
 Room* get_room(int client_id){
     GameConfiguration* game_config = conf->game_config ;
     for (int i = 0; i < game_config->nb_room; i++)
@@ -74,6 +97,12 @@ Room* get_room(int client_id){
     }
 }
 
+/**
+ * @brief  Get opponent
+ * 
+ * @param  client_id: identifier of client
+ * @return room
+ */
 int get_adversaire(int client_id){
 
     Room* room = get_room(client_id);

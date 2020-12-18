@@ -1,3 +1,9 @@
+/*
+ * Created on Fri Dec 18 2020
+ *
+ * Copyright (c) 2020 Léo Albouy & Louis Clement & Max Fournier & Térence Epinat
+ */
+
 #ifndef SRC_SERVER_UTILS_CONFIG_H_
 #define SRC_SERVER_UTILS_CONFIG_H_
 

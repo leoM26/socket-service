@@ -1,3 +1,9 @@
+/*
+ * Created on Fri Dec 18 2020
+ *
+ * Copyright (c) 2020 Léo Albouy & Louis Clement & Max Fournier & Térence Epinat
+ */
+
 #ifndef PAQUET_HEADER_FILE_H
 #define PAQUET_HEADER_FILE_H
 
@@ -26,9 +32,6 @@ typedef struct {
 typedef struct {
     int winner;
 }End_game_data;
-
-
-
 
 enum code_protocol {
     CONNEXION=0,//connexion ON

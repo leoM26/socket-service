@@ -4,3 +4,7 @@ build/
 .vscode/
 *.o
 output/*
+html/
+latex/
+out/
+xml/
