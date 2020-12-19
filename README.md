@@ -29,8 +29,8 @@
     <li>
       <a href="#installation">Installation</a>
       <ul>
-        <li><a href="#prérequis-:">Prérequis</a></li>
-        <li><a href="#utilisation-:">Utilisation</a></li>
+        <li><a href="#prérequis-">Prérequis</a></li>
+        <li><a href="#utilisation-">Utilisation</a></li>
       </ul>
     </li>
     <li>
