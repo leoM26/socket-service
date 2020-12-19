@@ -1,12 +1,3 @@
-<!--
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
---!>
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
@@ -19,14 +10,12 @@
   <p align="center">
     Dilemme du prisonnier
     <br />
-    <a href=""><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/leoM26/socket-service/tree/master/docs"><strong>Explorer la doc »</strong></a>
     <br />
     <br />
-    <a href="">View Demo</a>
+    <a href="https://github.com/leoM26/socket-service/issues">Report Bug</a>
     ·
-    <a href="">Report Bug</a>
-    ·
-    <a href="">Request Feature</a>
+    <a href="https://github.com/leoM26/socket-service/pulls">Request Feature</a>
   </p>
 </p>
 
@@ -67,9 +56,14 @@ Le doctorant, qui n’est pas un développeur, a besoin d’accumuler des donné
 
 ### Prérequis :
 
-Vérifier les bibliothèques suivante sur Fedora: 
+Installer les bibliothèques suivante sur Fedora: 
 - libconfig-devel
+
+`dnf install libconfig-devel`
+
 - json-c-devel
+
+`dnf install json-c-devel`
 
 ### Utilisation :
 
