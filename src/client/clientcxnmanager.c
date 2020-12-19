@@ -21,7 +21,11 @@
 
 int Socket;
 
-
+/**
+ * @brief  Thread process 
+ * 
+ * @param  ptr: socket
+ */
 void *threadProcess(void *ptr)
 {
     char buffer_in[BUFFERSIZE];
@@ -80,7 +84,7 @@ void *threadProcess(void *ptr)
  * @brief  Open connection with server
  *  
  * @param  cfg: client configuration
- * @return Socket
+ * @return sockfd
  */
 int open_connection(Config *cfg)
 {

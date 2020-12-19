@@ -221,8 +221,21 @@ void *threadProcess(void *ptr)
                 }
                 else
                 {
-                    End_game_data data = {.winner = adversaire_connection->points < connection->points};
-                    End_game_data adversaire_data = {.winner = adversaire_connection->points > connection->points};
+                    int winner = 2;
+                    int winner_adv = 2;
+                    if (adversaire_connection->points > connection->points)
+                    {
+                        winner = 0;
+                        winner_adv = 1;
+                    }
+                    else if (adversaire_connection->points < connection->points)
+                    {
+                        winner = 1;
+                        winner_adv = 0;
+                    }
+
+                    End_game_data data = {.winner = winner};
+                    End_game_data adversaire_data = {.winner = winner_adv};
                     send_packet(END_GAME,packet->client_id,&data,connection->sockfd);
                     send_packet(END_GAME,adversaire_connection->client_id,&adversaire_data,adversaire_connection->sockfd);
                 }

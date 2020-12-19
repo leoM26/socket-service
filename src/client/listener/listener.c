@@ -31,7 +31,7 @@ void on_round_start(Start_round_data* data){
 /**
  * @brief Listener on end game
  * 
- * @param  data: data of struc End_game_data
+ * @param  data: data in struc End_game_data
  */
 void on_end_game(End_game_data* data){
     end_game(data->winner);

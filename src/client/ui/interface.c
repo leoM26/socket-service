@@ -14,25 +14,20 @@ GtkBuilder *builder = NULL;
 
 int choix = 0;
 int time_id = 0;
-int elapsed_time = 30;
-
+float elapsed_time = 0;
 
 /**
- * @brief 
+ * @brief Timer for reaction time
  *   
- * @return 
  */
 int timer_handler()
 {
-    if (elapsed_time > 0)
-    {
-        elapsed_time--;
-        char txt[100];
-        GtkLabel *timelabel = GTK_LABEL(gtk_builder_get_object(builder, "lb_time_msg"));
-        snprintf(txt, 100, "%02i", elapsed_time);
-        gtk_label_set_text(timelabel, txt);
-        return 1;
-    }
+    elapsed_time += 0.1;
+    char txt[100];
+    GtkLabel *timelabel = GTK_LABEL(gtk_builder_get_object(builder, "lb_time_msg"));
+    snprintf(txt, 100, "%0.1f", elapsed_time);
+    gtk_label_set_text(timelabel, txt);
+    return 1;
 }
 
 /**
@@ -55,7 +50,11 @@ void rep_connection()
 void round_start(int winner, int round, int points)
 {
     GtkLabel *evenement = GTK_LABEL(gtk_builder_get_object(builder, "lb_evenement_msg"));
-    gtk_label_set_text(evenement, "Faites vos jeux !");
+    gtk_label_set_text(evenement, "Un nouveau round commence !");
+    if (time_id > 0)
+    {
+        g_source_remove(time_id);
+    }
     if (round != 0)
     {
         GtkLabel *label = GTK_LABEL(gtk_builder_get_object(builder, "lb_winner_msg"));
@@ -81,6 +80,10 @@ void round_start(int winner, int round, int points)
             gtk_label_set_text(evenement, "Vous ne gagnez pas de point");
         }
     }
+    sleep(5);
+    elapsed_time = 0;
+    time_id = g_timeout_add(100, (GSourceFunc)timer_handler, NULL);
+    gtk_label_set_text(evenement, "Faites vos jeux !");
     GtkLabel *round_label = GTK_LABEL(gtk_builder_get_object(builder, "lb_round_msg"));
     char title_round[3];
     sprintf(title_round, "%d", round);
@@ -99,16 +102,24 @@ void round_start(int winner, int round, int points)
  */
 void end_game(int winner)
 {
-    GtkLabel *label = GTK_LABEL(gtk_builder_get_object(builder, "lb_evennement_msg"));
+    GtkLabel *label = GTK_LABEL(gtk_builder_get_object(builder, "lb_evenement_msg"));
 
-    if (winner)
+    if (winner == 1)
     {
         gtk_label_set_text(label, "Bravo ! Vous etes le gagnant");
     }
+    else if (winner == 0)
+    {
+        gtk_label_set_text(label, "Dommage ! Vous avez perdu");        
+    }
     else
     {
-        gtk_label_set_text(label, "Dommage ! Vous avez perdu");
+        gtk_label_set_text(label, "Egalité !"); 
     }
+    
+    GtkLabel *round_label = GTK_LABEL(gtk_builder_get_object(builder, "lb_round_msg"));
+    gtk_label_set_text(round_label, "Partie terminé");
+    g_source_remove(time_id);
 }
 
 /**
@@ -186,5 +197,4 @@ void interface_start(int argc, char **argv)
     g_object_set(gtk_settings_get_default(), "gtk-application-prefer-dark-theme", TRUE, NULL);
     gtk_builder_connect_signals(builder, NULL);
     gtk_widget_show(win);
-    time_id = g_timeout_add(1000, (GSourceFunc)timer_handler, NULL);
 }

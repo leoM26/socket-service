@@ -107,9 +107,10 @@ void *parse_json(char *json, enum code_protocol code)
     }
     case END_GAME:
     {
-        End_game_data data;
-        json_object_object_get_ex(object, "winner", &data.winner);
-        return &data;
+        End_game_data *data = (End_game_data *)malloc(sizeof(End_game_data));
+        json_object *winner_object = json_object_object_get(object, "winner");
+        data->winner = json_object_get_int(winner_object);
+        return data;
         break;
     }
     }
