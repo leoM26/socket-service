@@ -85,6 +85,9 @@ make all
 
 #Executer les clients
 ./output/client
+
+#Générer la documentation
+make doc 
 ```
 
 ## Configurations
