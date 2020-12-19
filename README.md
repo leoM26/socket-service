@@ -29,15 +29,15 @@
     <li>
       <a href="#installation">Installation</a>
       <ul>
-        <li><a href="#prérequis">Prérequis</a></li>
-        <li><a href="#utilisation">Utilisation</a></li>
+        <li><a href="#prérequis-:">Prérequis</a></li>
+        <li><a href="#utilisation-:">Utilisation</a></li>
       </ul>
     </li>
     <li>
     <a href="#configurations">Configurations</a>
     <ul>
-        <li><a href="#pour-le-serveur">Serveur</a></li>
-        <li><a href="#pour-les-clients">Clients</a></li>
+        <li><a href="#pour-le-serveur-">Serveur</a></li>
+        <li><a href="#pour-les-clients-">Clients</a></li>
       </ul>
     </li>
     <li><a href="#règle-du-jeu">Règle jeu</a></li>
