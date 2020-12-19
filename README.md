@@ -133,11 +133,11 @@ server_port = 7799; #Port utilisé pour le socket
 Les règles du jeu sont simples, vous êtes confronté avec un autre prisonnier qui souhaite sortir au plus vite ! 
 S'oppose à vous 2 propositions : `Collaborer` ou `Trahir`. Ce choix sera décisif selon celui de votre adversaire.
 
-Si vous choissisez tous les deux `Collaborer` : Vous gagnerez **1** point chacun (pas de prise de risque).
-Si vous choissisez tous les deux `Trahir` : Vous perderez **5** points chacun.
+Si vous choisissez tous les deux `Collaborer` : Vous gagnerez **1** point chacun (pas de prise de risque).
+Si vous choissisez tous les deux `Trahir` : Vous perdrez **5** points chacun.
 
-Si vous choissisez `Collaborer` et votre adversaire `Trahir` : Vous ne gagnerez pas de point alors que votre adversaire en gagnera **5** points.
-Si vous choissisez `Trahir` et votre adversaire `Collaborer` : Vous gagnerez **5** points alors que votre adversaire n'en gagnera pas.
+Si vous choisissez `Collaborer` et votre adversaire `Trahir` : Vous ne gagnerez pas de point alors que votre adversaire en gagnera **5** points.
+Si vous choisissez `Trahir` et votre adversaire `Collaborer` : Vous gagnerez **5** points alors que votre adversaire n'en gagnera pas.
 ## Résultat jeu
 
 Les résultats de votre partie seront enregistrés dans le dossier `exports` dans un fichier nommé `results.csv`.
